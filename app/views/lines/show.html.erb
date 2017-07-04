@@ -19,13 +19,13 @@
       <p>Average service time: <%= @line.avg_service_time %></p>
 
       <!-- CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT -->
-      <% @array = @line.appointments.order("created_at ASC") %>
+      <% @current_line = @line.appointments.order("created_at ASC") %>
 
       <% if user_signed_in? %>
         <!-- CHECK IF USER IS IN LINE ALREADY -->
         <% @user_in_line = false %>
         <% @appointment = nil %>
-        <% @array.each do |app| %>
+        <% @current_line.each do |app| %>
           <% app.user == current_user ? @user_in_line = true && @appointment = app : @user_in_line = false %>
         <% end %>
 
@@ -43,25 +43,38 @@
 
     <!-- VISUALIZING THE LINE, NO CONDITIONS -->
     <div class="col-xs-12 col-md-6">
-      <% @array.each_with_index do |appointment, index| %>
+      <% @current_line.each_with_index do |appointment, index| %>
         <% position = index + 1 %>
-        <h2><%= position.to_s + ". " + appointment.user.first_name + " " + appointment.user.last_name %></h2>
+        <% user = User.find(appointment.user_id) %>
+        <div class="appointment-list">
+          <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+          <%= image_tag avatar_url, class: "appointment-list-avatar" %>
+          <div class='appointment-list-body'>
+            <h4><%= position.to_s + ". " + appointment.user.first_name + " " + appointment.user.last_name %></h4>
+          </div>
+          <ul class="list-inline appointment-list-controls">
+            <!-- IF CURRENT USER IS THE HOST, SHE CAN REMOVE A USER FROM THE LINE -->
+            <% if current_user.id == @line.user_id %>
+              <li><%= link_to "", appointment_path(appointment), method: :delete, class: "fa fa-check", title: "Appointment done" %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
     </div>
 
-    <!-- ESTIMATING TIME LEFT OF LINE, CONDITIONS: -->
-    <!-- * ONLY VISIBLE IF USER SIGNED IN AND IN LINE -->
+    <!-- ESTIMATING TIME LEFT OF LINE, NO CONDITIONS: -->
     <div class="col-xs-12 col-md-4 col-md-offset-4">
 
+      <!-- IF USER SIGNED IN AND IN LINE WE CALCULATE HER TIME LEFT -->
       <% if @user_in_line %>
-        <% @array.each_with_index do |appointment, index| %>
+        <% @current_line.each_with_index do |appointment, index| %>
           <% if appointment.user_id == current_user.id %>
             <% @current_user_position = index %>
           <% end %>
         <% end %>
-        <% people_in_front = @array[0..@current_user_position].count %>
+        <% people_in_front = @current_line[0..@current_user_position-1].count %>
       <% else %>
-        <% people_in_front = @array.count %>
+        <% people_in_front = @current_line.count %>
       <% end %>
 
       <h2>Est. time left <%= people_in_front * @line.avg_service_time %> minutes.</h2>
