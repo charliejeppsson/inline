@@ -4,8 +4,8 @@ class CreateLines < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :organization_name
       t.string :location
-      t.datetime :start
-      t.datetime :end
+      t.datetime :start_time
+      t.datetime :end_time
       t.integer :avg_service_time
 
       t.timestamps

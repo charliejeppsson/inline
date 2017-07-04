@@ -1,2 +1,40 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% content_for :full_page do %>
+  <div class="container banner">
+    <%= image_tag "inline_logo_white.png", class: "banner-logo" %>
+    <div class="row banner-middle">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>never wait in line again</h1>
+        <%= link_to 'get started', new_user_registration_path, class: "btn btn-lg my-btn" %>
+      </div>
+    </div>
+    <div class="row banner-bottom">
+      <div class="col-md-6 col-md-offset-3">
+        <%= link_to 'already a member?', new_user_session_path, class: "already-member" %>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'shared/how_it_works' %>
+
+  <h1>User paths</h1>
+  <ul>
+    <li><%= link_to 'devise/sessions#new (sign in)', new_user_session_path %></li>
+    <li><%= link_to 'devise/registrations#new (sign up)', new_user_registration_path %></li>
+    <li><%= link_to 'devise/registrations#edit', edit_user_registration_path %></li>
+    <li><%= link_to 'sign out', destroy_user_session_path, method: :delete %></li>
+  </ul>
+
+  <h1>Line paths:</h1>
+  <ul>
+    <li><%= link_to 'lines#index', lines_path %></li>
+    <li><%= link_to 'lines#new', new_line_path %></li>
+    <li><%= link_to 'lines#show', line_path(6) %></li>
+    <li><%= link_to 'lines#edit', edit_line_path(6) %></li>
+  </ul>
+
+
+  <h1>Appointment paths:</h1>
+  <ul>
+    <li><%= link_to 'appointments#index', appointments_path %></li>
+  </ul>
+<% end %>

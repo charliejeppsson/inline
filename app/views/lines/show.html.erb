@@ -1,0 +1,71 @@
+
+<div class="container">
+  <div class="row text-center">
+
+    <!-- LINE INFORMATION, NO CONDITIONS -->
+    <div class="col-xs-12 col-md-6">
+      <h2><%= @line.title %> </h2>
+      <% unless @line.organization_name.nil? %>
+        <p>Organization: <%= @line.organization_name %></p>
+      <% else %>
+        <% user = User.find(@line.user_id) %>
+        <p>Host: <%= @user.first_name + " " + @user.last_name %></p>
+      <% end %>
+      <p>Location: <%= @line.location %></p>
+      <p>Start time: <%= @line.start_time %></p>
+      <% unless @line.end_time.nil? %>
+        <p>End time: <%= @line.end_time %></p>
+      <% end %>
+      <p>Average service time: <%= @line.avg_service_time %></p>
+
+      <!-- CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT -->
+      <% @array = @line.appointments.order("created_at ASC") %>
+
+      <% if user_signed_in? %>
+        <!-- CHECK IF USER IS IN LINE ALREADY -->
+        <% @user_in_line = false %>
+        <% @appointment = nil %>
+        <% @array.each do |app| %>
+          <% app.user == current_user ? @user_in_line = true && @appointment = app : @user_in_line = false %>
+        <% end %>
+
+        <% if @user_in_line %>
+          <!-- IF USER SIGNED IN AND IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
+          <%= link_to "drop out of line", appointment_path(@appointment), method: :delete, data: {confirm: "Are you sure? You will lose your place in the line."}, class: "btn my-btn" %>
+        <% else %>
+          <!-- IF USER EITHER NOT SIGNED IN OR NOT IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
+          <%= link_to "get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn"  %>
+        <% end %>
+      <% else %>
+        <%= link_to "get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn"  %>
+      <% end %>
+    </div>
+
+    <!-- VISUALIZING THE LINE, NO CONDITIONS -->
+    <div class="col-xs-12 col-md-6">
+      <% @array.each_with_index do |appointment, index| %>
+        <% position = index + 1 %>
+        <h2><%= position.to_s + ". " + appointment.user.first_name + " " + appointment.user.last_name %></h2>
+      <% end %>
+    </div>
+
+    <!-- ESTIMATING TIME LEFT OF LINE, CONDITIONS: -->
+    <!-- * ONLY VISIBLE IF USER SIGNED IN AND IN LINE -->
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+
+      <% if @user_in_line %>
+        <% @array.each_with_index do |appointment, index| %>
+          <% if appointment.user_id == current_user.id %>
+            <% @current_user_position = index %>
+          <% end %>
+        <% end %>
+        <% people_in_front = @array[0..@current_user_position].count %>
+      <% else %>
+        <% people_in_front = @array.count %>
+      <% end %>
+
+      <h2>Est. time left <%= people_in_front * @line.avg_service_time %> minutes.</h2>
+    </div>
+
+  </div>
+</div>

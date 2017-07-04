@@ -3,15 +3,26 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO</title>
+    <title>InLine - Skip the line</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <%= yield %>
+    <!-- To have the navbar everywhere except the home page -->
+    <% if content_for :full_page %>
+      <%= yield :full_page %>
+    <% elsif current_user.nil? %>
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+    <% else %>
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+      <%#= render "shared/footer" %>
+    <% end %>
+
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

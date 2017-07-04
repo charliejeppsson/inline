@@ -1,7 +1,7 @@
 <div class="navbar-wagon">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "logo.png" %>
+    <%= image_tag "inline_logo_white.png", style: "width: 150px;" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -26,30 +26,6 @@
         </div>
       <% end %>
 
-      <!-- Profile picture and dropdown -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
-          <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-
     <% else %>
 
       <!-- Login text link -->
@@ -57,8 +33,32 @@
 
     <% end %>
 
-    <!-- Button (call-to-action) -->
-    <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <!-- Avatar with profile picture and dropdown -->
+    <div class="navbar-wagon-item">
+      <div class="dropdown">
+        <% if user_signed_in? %>
+          <% avatar_url = current_user.facebook_picture_url || "avatar-placeholder.png" %>
+          <%= image_tag avatar_url, class: "avatar-large dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <!-- <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+            <li>
+              <%#= link_to user_path(current_user.id) do  %>
+                <%#= image_tag("Icones/profile.png", class:"profile-icon") %> Profile
+              <%# end %>
+            </li>
+            <li>
+              <%#= link_to new_event_path do  %>
+                <%#= image_tag("Icones/bulb.png", class:"bulb-icon") %>Create event
+              <#% end %>
+            </li>
+            <li>
+              <%#= link_to destroy_user_session_path, method: :delete do  %>
+               <%#= image_tag("Icones/logout.png", class:"logout-icon") %>Log out
+               <%# end %>
+            </li>
+          </ul> -->
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <!-- Dropdown list appearing on mobile only -->

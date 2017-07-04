@@ -9,6 +9,7 @@ gem 'puma'
 gem 'rails', '5.1.1'
 gem 'redis'
 
+gem 'momentjs-rails', '>= 2.9.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
@@ -16,6 +17,11 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
+gem 'coffee-rails'
+gem 'rails-assets-bootstrap3-datepicker', source: 'https://rails-assets.org'
+
+# Added
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'better_errors'
