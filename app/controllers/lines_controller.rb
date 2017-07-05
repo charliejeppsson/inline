@@ -3,7 +3,11 @@ class LinesController < ApplicationController
   before_action :require_login, only: [:new, :create, :get_in_line]
 
   def index
-    @lines = Line.all
+    if params.has_key?(:search_value) and params[:search_value] != ""
+      @results = Line.global_search(params[:search_value])
+    else
+      @lines = Line.all
+    end
   end
 
   def show
@@ -56,6 +60,14 @@ class LinesController < ApplicationController
     Appointment.create(user_id: @user.id, line_id: @line.id)
     redirect_to line_path(@line)
     flash[:notice] = "You have successfully secured a place in this line."
+  end
+
+  def make_admin
+    @line = Line.find(params[:line_id])
+    @user = User.find(params[:user_id])
+    Administrator.create(user_id: @user.id, line_id: @line.id)
+    redirect_to line_path(@line)
+    flash[:notice] = "#{@user.first_name} #{@user.last_name} has successfully been appointed an admin of this line."
   end
 
   # def user_in_line # CHECKS IF USER IS IN LINE, RETURNS BOOLEAN AND APPOINTMENT (IF ANY)

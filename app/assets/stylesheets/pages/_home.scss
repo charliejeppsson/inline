@@ -1,3 +1,5 @@
+
+// BANNER SECTION
 .banner {
   background-image: linear-gradient(-225deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 50%), url('airport-line-1.png');
   color: white;
@@ -43,6 +45,8 @@
   text-decoration: none;
   color: white;
 }
+
+// HOW IT WORKS SECTION
 .how-it-works {
   height: 200px;
   display: flex;
@@ -76,4 +80,39 @@
   font-size: 50px;
   margin: 11px 0 20px 0;
   color: white;
+}
+
+
+/* HOME PAGE SEARCH FORM */
+.home-search {
+  flex: 0 1 300px;
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+  position: relative;
+}
+.home-search-btn {
+  line-height: 40px;
+  color: #E6E6E6;
+  border: none;
+  background: #D16014;
+  position: absolute;
+}
+.home-search-input {
+  flex: 0 1 300px;
+  transition: all 0.15s ease;
+  line-height: 40px;
+  font-weight: lighter;
+  color: #666666;
+  border: 1px solid #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 14px;
+  outline: none;
+}
+.home-search-input:focus  {
+  border: 1px solid #CCCCCC;
+}
+.search-btn {
+  margin-left: 5px;
 }

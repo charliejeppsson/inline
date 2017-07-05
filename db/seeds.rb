@@ -2,6 +2,7 @@
 puts 'Cleaning database...'
 
 Appointment.destroy_all
+Administrator.destroy_all
 Line.destroy_all
 User.destroy_all
 

@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :lines
   has_many :appointments
+  has_many :administrators
 
   validates :first_name, :last_name, presence: true
 

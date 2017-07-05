@@ -8,6 +8,7 @@ gem 'pg'
 gem 'puma'
 gem 'rails', '5.1.1'
 gem 'redis'
+gem 'pg_search'
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'autoprefixer-rails'
