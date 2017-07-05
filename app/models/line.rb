@@ -8,7 +8,7 @@ class Line < ApplicationRecord
 
   # SEARCH BAR CONFIGURATION
   include PgSearch
-  pg_search_scope :global_search, against: [ :title, :location, :organization_name ],
+  pg_search_scope :line_search, against: [ :title, :location, :organization_name ],
   using: {tsearch: {prefix: true, any_word: true}}
 
 end

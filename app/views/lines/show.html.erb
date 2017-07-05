@@ -1,87 +1,31 @@
-
+<!-- BANNER WITH GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON -->
 <div class="container">
   <div class="row text-center">
+    <h1><%= @line.title %></h1>
+    <%= render partial: 'time_left' %>
+    <%= render partial: 'line_buttons' %>
+  </div>
+</div>
 
-    <!-- LINE INFORMATION, NO CONDITIONS -->
-    <div class="col-xs-12 col-md-6">
-      <h2><%= @line.title %> </h2>
-      <% unless @line.organization_name.nil? %>
-        <p>Organization: <%= @line.organization_name %></p>
-      <% else %>
-        <% user = User.find(@line.user_id) %>
-        <p>Host: <%= @user.first_name + " " + @user.last_name %></p>
-      <% end %>
-      <p>Location: <%= @line.location %></p>
-      <p>Start time: <%= @line.start_time %></p>
-      <% unless @line.end_time.nil? %>
-        <p>End time: <%= @line.end_time %></p>
-      <% end %>
-      <p>Average service time: <%= @line.avg_service_time %></p>
+<!-- TAB PANEL WITH BUTTONS -->
+<div class="container text-center">
+  <div class="tabs">
+    <a class="tab active" data-target="#line_info">line info</a>
+    <a class="tab" data-target="#current_line">current line</a>
+    <a class="tab" data-target="#directions">directions</a>
+    <!-- LINE ADMINS, ONLY VISIBLE TO THE LINE HOST -->
+    <% if current_user.id == @line.user_id %>
+      <a class="tab" data-target="#line_admins">line admins</a>
+    <% end %>
+  </div>
+</div>
 
-      <!-- CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT -->
-      <% @current_line = @line.appointments.order("created_at ASC") %>
-
-      <% if user_signed_in? %>
-        <!-- CHECK IF USER IS IN LINE ALREADY -->
-        <% @user_in_line = false %>
-        <% @appointment = nil %>
-        <% @current_line.each do |app| %>
-          <% app.user == current_user ? @user_in_line = true && @appointment = app : @user_in_line = false %>
-        <% end %>
-
-        <% if @user_in_line %>
-          <!-- IF USER SIGNED IN AND IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
-          <%= link_to "drop out of line", appointment_path(@appointment), method: :delete, data: {confirm: "Are you sure? You will lose your place in the line."}, class: "btn my-btn" %>
-        <% else %>
-          <!-- IF USER EITHER NOT SIGNED IN OR NOT IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
-          <%= link_to "get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn"  %>
-        <% end %>
-      <% else %>
-        <%= link_to "get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn"  %>
-      <% end %>
-    </div>
-
-    <!-- VISUALIZING THE LINE, NO CONDITIONS -->
-    <div class="col-xs-12 col-md-6">
-      <% @current_line.each_with_index do |appointment, index| %>
-        <% position = index + 1 %>
-        <% user = User.find(appointment.user_id) %>
-        <div class="appointment-list">
-          <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
-          <%= image_tag avatar_url, class: "appointment-list-avatar" %>
-          <div class='appointment-list-body'>
-            <h4><%= position.to_s + ". " + appointment.user.first_name + " " + appointment.user.last_name %></h4>
-          </div>
-          <ul class="list-inline appointment-list-controls">
-            <!-- IF CURRENT USER IS THE HOST, SHE CAN REMOVE A USER FROM THE LINE -->
-            <% if current_user.id == @line.user_id %>
-              <li><%= link_to "", appointment_path(appointment), method: :delete, class: "fa fa-check", title: "Appointment done" %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- ESTIMATING TIME LEFT OF LINE, NO CONDITIONS: -->
-    <div class="col-xs-12 col-md-4 col-md-offset-4">
-
-      <!-- IF USER SIGNED IN AND IN LINE WE CALCULATE HER TIME LEFT -->
-      <% if @user_in_line %>
-        <% @current_line.each_with_index do |appointment, index| %>
-          <% if appointment.user_id == current_user.id %>
-            <% @current_user_position = index %>
-          <% end %>
-        <% end %>
-        <% people_in_front = @current_line[0..@current_user_position-1].count %>
-      <% else %>
-        <% people_in_front = @current_line.count %>
-      <% end %>
-
-      <h2>Est. time left <%= people_in_front * @line.avg_service_time %> minutes.</h2>
-    </div>
-
-    <!-- USER SEARCH BAR FOR HOST TO FIND COWORKERS AND MAKE THEM ADMINS -->
-
-
+<!-- TAB CONTENT RENDERING FROM PARTIALS -->
+<div class="container">
+  <div class="row text-center">
+    <%= render partial: 'line_info' %>
+    <%= render partial: 'current_line' %>
+    <%= render partial: 'line_admins' %>
+    <!-- DIRECTIONS -->
   </div>
 </div>

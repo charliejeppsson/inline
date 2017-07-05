@@ -7,13 +7,15 @@
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
-    <!-- Search form -->
-    <form action="" class="navbar-wagon-search">
-      <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
-      <button type="submit" class="navbar-wagon-search-btn">
-        <i class="fa fa-search"></i>
-      </button>
-    </form>
+    <!-- LINE SEARCH BAR -->
+    <div class="search events">
+      <%= form_tag('/lines', method: 'get',  class:'home-search' ) do  %>
+        <%= text_field_tag :search_value, params[:search_value], placeholder: 'Find your line' , class: "home-search-input" %>
+        <button type="submit" class="navbar-wagon-search-btn">
+          <i class="fa fa-search"></i>
+        </button>
+      <% end %>
+    </div>
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>

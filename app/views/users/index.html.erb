@@ -1,0 +1,23 @@
+
+<!-- USER SEARCH RESULTS FOR ADDING ADMINS, ONLY VISIBLE TO EVENT'S HOST -->
+<div class="line-list">
+  <ul class="list-unstyled">
+    <% if params[:search_value] != nil && params[:search_value] != "" %>
+      <% @results.each do |user| %>
+        <div class="appointment-list">
+          <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+          <%= image_tag avatar_url, class: "appointment-list-avatar" %>
+          <div class='appointment-list-body'>
+            <h4><%= user.first_name + " " + user.last_name %></h4>
+          </div>
+          <ul class="list-inline appointment-list-controls">
+            <!-- THE LINE HOST CAN MAKE A USER FROM THE SEARCH RESULTS LIST AN ADMIN -->
+            <%# @user_id = user.id %>
+            <%# @line_id = @line.id %>
+            <li><%= link_to "", line_user_make_admin_path(user.id), method: :get, class: "fa fa-user-plus", title: "make admin" %></li>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,39 @@
+
+<!-- LISTING THE ADMINS, NO CONDITIONS -->
+<div class="tab-content hidden" id="line_admins">
+  <div class="col-xs-12 col-md-6">
+    <% @admins.each_with_index do |admin, index| %>
+      <% position = index + 1 %>
+      <% user = User.find(admin.user_id) %>
+      <div class="appointment-list">
+        <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+        <%= image_tag avatar_url, class: "appointment-list-avatar" %>
+        <div class='appointment-list-body'>
+          <h4><%= position.to_s + ". " + admin.user.first_name + " " + admin.user.last_name %></h4>
+        </div>
+        <ul class="list-inline appointment-list-controls">
+          <!-- IF CURRENT USER IS THE HOST, SHE CAN REMOVE A USER FROM THE ADMIN LIST -->
+          <% if current_user.id == @line.user_id %>
+            <li><%= link_to "", administrator_path(admin), method: :delete, class: "fa fa-close", title: "remove admin" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <!-- USER SEARCH BAR FOR ADDING ADMINS, ONLY VISIBLE TO EVENT'S HOST -->
+    <div class="search events">
+      <%= form_tag('/lines/:line_id/users', method: 'get',  class:'home-search' ) do  %>
+        <%= text_field_tag :search_value, params[:search_value], placeholder: 'Search users' , class: "home-search-input" %>
+        <button type="submit" class="navbar-wagon-search-btn">
+          <i class="fa fa-search"></i>
+        </button>
+      <% end %>
+    </div>
+
+    <!-- USER SEARCH RESULTS FOR ADDING ADMINS, ONLY VISIBLE TO EVENT'S HOST -->
+
+  </div>
+</div>
+

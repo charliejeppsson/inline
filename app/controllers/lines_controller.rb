@@ -1,10 +1,10 @@
 class LinesController < ApplicationController
-  before_action :set_line, only:[:show, :edit, :update, :destroy]
+  before_action :set_line, only:[:show, :edit, :update, :destroy, :line_info]
   before_action :require_login, only: [:new, :create, :get_in_line]
 
   def index
     if params.has_key?(:search_value) and params[:search_value] != ""
-      @results = Line.global_search(params[:search_value])
+      @results = Line.line_search(params[:search_value])
     else
       @lines = Line.all
     end
@@ -12,7 +12,10 @@ class LinesController < ApplicationController
 
   def show
     @alert_message = "You are viewing #{@line.title}"
-    # @line = Line.find(params[:id])
+    # CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT
+    @current_line = @line.appointments.order("created_at ASC")
+    # CREATE AN ARRAY WITH ADMINISTRATORS LISTED ACCORDING TO CREATED_AT
+    @admins = @line.administrators.order("created_at ASC")
   end
 
   def new

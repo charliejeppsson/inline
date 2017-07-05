@@ -1,0 +1,19 @@
+
+<!-- ESTIMATING TIME LEFT OF LINE, NO CONDITIONS: -->
+<div class="col-xs-12 col-md-4 col-md-offset-4">
+
+  <!-- IF USER SIGNED IN AND IN LINE WE CALCULATE HER TIME LEFT -->
+  <% if @user_in_line %>
+    <% @current_line.each_with_index do |appointment, index| %>
+      <% if appointment.user_id == current_user.id %>
+        <% @current_user_position = index %>
+      <% end %>
+    <% end %>
+    <% people_in_front = @current_line[0..@current_user_position-1].count %>
+  <% else %>
+    <% people_in_front = @current_line.count %>
+  <% end %>
+
+  <h2>Est. time left <%= people_in_front * @line.avg_service_time %> minutes.</h2>
+</div>
+

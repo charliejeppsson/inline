@@ -31,4 +31,10 @@ class User < ApplicationRecord
 
     return user
   end
+
+  # SEARCH BAR CONFIGURATION
+  include PgSearch
+  pg_search_scope :user_search, against: [ :first_name, :last_name, :email ],
+  using: {tsearch: {prefix: true, any_word: true}}
+
 end
