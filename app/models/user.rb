@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   # SEARCH BAR CONFIGURATION
   include PgSearch
-  pg_search_scope :user_search, against: [ :first_name, :last_name, :email ],
+  pg_search_scope :user_search, against: [ :first_name, :last_name ],
   using: {tsearch: {prefix: true, any_word: true}}
 
 end

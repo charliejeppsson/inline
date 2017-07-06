@@ -1,24 +1,25 @@
 Rails.application.routes.draw do
 
-  get 'users/show'
-
+  # ADMINISTRATORS:
   resources :administrators, only: [:new, :create, :destroy]
 
+  # APPOINTMENTS:
   resources :appointments
 
-  # We want to take make-admin from route lines/72/make-admin to: lines/12/users/index/72/make_admin
-
+  # LINES:
   resources :lines do
-    get 'get-in-line', to: "lines#get_in_line"
-    # get 'user-in-line', to: "lines#user_in_line"
-    # get 'make-admin', to: "lines#make_admin"
-    resources :users, only: [:index] do
-      get 'make-admin'
-    end
+    get 'get_in_line', to: "lines#get_in_line"
   end
+
+  get 'lines(/:line_id)(/make_admin/:user_id)', controller: 'lines', action: 'make_admin', as: 'line_make_admin'
+
+
+  # USERS:
+  get 'users/show'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  # PAGES:
   root to: 'pages#home'
 
 end

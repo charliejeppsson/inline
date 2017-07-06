@@ -1,6 +1,6 @@
 
-<!-- LINE INFORMATION, NO CONDITIONS -->
-<div class="tab-content" id="line_info">
+<!-- LINE INFORMATION, HIDDEN FROM START IF USER IS HOST -->
+<div class="tab-content <%= current_user.id == @line.user.id ? "hidden" : "" %>" id="line_info">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
     <% unless @line.organization_name.nil? %>
       <p>Organization: <%= @line.organization_name %></p>

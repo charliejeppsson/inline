@@ -1,21 +1,19 @@
-<!-- BANNER WITH GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON -->
-<div class="container">
-  <div class="row text-center">
-    <h1><%= @line.title %></h1>
-    <%= render partial: 'time_left' %>
-    <%= render partial: 'line_buttons' %>
-  </div>
-</div>
 
-<!-- TAB PANEL WITH BUTTONS -->
+<%= render partial: 'line_banner' %>
+
+<!-- TAB PANEL WITH LINKS TO SUB-PAGES -->
 <div class="container text-center">
   <div class="tabs">
-    <a class="tab active" data-target="#line_info">line info</a>
-    <a class="tab" data-target="#current_line">current line</a>
-    <a class="tab" data-target="#directions">directions</a>
     <!-- LINE ADMINS, ONLY VISIBLE TO THE LINE HOST -->
     <% if current_user.id == @line.user_id %>
-      <a class="tab" data-target="#line_admins">line admins</a>
+      <a class="tab active" data-target="#line_admins">line admins</a>
+      <a class="tab" data-target="#line_info">line info</a>
+      <a class="tab" data-target="#current_line">current line</a>
+      <a class="tab" data-target="#directions">directions</a>
+    <% else %>
+      <a class="tab active" data-target="#line_info">line info</a>
+      <a class="tab" data-target="#current_line">current line</a>
+      <a class="tab" data-target="#directions">directions</a>
     <% end %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 class LinesController < ApplicationController
-  before_action :set_line, only:[:show, :edit, :update, :destroy, :line_info]
+  before_action :set_line, only:[:show, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :create, :get_in_line]
 
   def index
@@ -11,12 +11,45 @@ class LinesController < ApplicationController
   end
 
   def show
-    @alert_message = "You are viewing #{@line.title}"
     # CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT
     @current_line = @line.appointments.order("created_at ASC")
+
     # CREATE AN ARRAY WITH ADMINISTRATORS LISTED ACCORDING TO CREATED_AT
     @admins = @line.administrators.order("created_at ASC")
+
+    # CHECK IF CURRENT USER IS HOST
+    current_user.id == @line.user_id ? @user_is_host = true : @user_is_host = false
+
+    # CHECK IF CURRENT USER IS ADMIN
+    @admins.each do |admin|
+      admin.user == current_user ? @user_is_admin = true : @user_is_admin = false
+    end
+
+    # USER SEARCH FUNCTION
+    if params.has_key?(:search_value) and params[:search_value] != ""
+      @results = User.user_search(params[:search_value])
+    else
+      @users = User.all
+    end
   end
+
+  # def line_info
+  # end
+
+  # def current_line
+  #   @line = Line.find(params[:line_id])
+  #   # CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT
+  #   @current_line = @line.appointments.order("created_at ASC")
+  # end
+
+  # def line_directions
+  # end
+
+  # def line_admins
+  #   @line = Line.find(params[:line_id])
+  #   # CREATE AN ARRAY WITH ADMINISTRATORS LISTED ACCORDING TO CREATED_AT
+  #   @admins = @line.administrators.order("created_at ASC")
+  # end
 
   def new
     @line = Line.new
