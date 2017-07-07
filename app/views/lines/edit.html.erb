@@ -1,2 +1,26 @@
-<h1>Lines#edit</h1>
-<p>Find me in app/views/lines/edit.html.erb</p>
+
+<div class="container" style="margin-bottom: 30px;">
+  <h2 class="text-center">Edit your line</h2>
+  <div class="row">
+    <div class='col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3'>
+      <%= simple_form_for @line do |f| %>  <!-- remote: true -->
+        <%= f.error_notification %>
+
+        <div class="form-inputs line-form">
+          <%= f.input :title, required: true, autofocus: true %>
+          <%= f.input :location, required: true, autofocus: true %>
+          <%= f.input :start_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker1"} %>
+          <%= f.input :end_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker2"} %>
+          <%= f.input :avg_service_time, required: true, autofocus: true %>
+          <%= f.input :organization_name, required: false, autofocus: true %>
+          <%= f.input :photo, as: :attachinary, class: "text-center" %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Edit line", class: "btn my-btn"  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

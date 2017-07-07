@@ -2,13 +2,6 @@
 <!-- GENERATE BUTTONS FOR GETTING IN LINE OR DROPPING OUT OF LINE -->
 <div class="col-xs-12 col-md-4 col-md-offset-4">
   <% if user_signed_in? %>
-    <!-- CHECK IF USER IS IN LINE ALREADY -->
-    <%# @user_in_line = false %>
-    <%# @appointment = nil %>
-    <%# @current_line.each do |app| %>
-      <%# app.user == current_user ? @user_in_line = true && @appointment = app : @user_in_line = false %>
-    <%# end %>
-
     <% if @user_in_line %>
       <!-- IF USER SIGNED IN AND IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
       <%= link_to "Drop out of line", appointment_path(@app), method: :delete, data: {confirm: "Are you sure? You will lose your place in the line."}, class: "btn my-btn" %>

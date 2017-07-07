@@ -1,0 +1,11 @@
+
+<div class="text-center hidden" id="line_settings">
+  <ul class="list-inline">
+    <li>
+      <%= link_to "Edit line", edit_line_path(@line), method: :get, class: "btn my-btn"  %>
+    </li>
+    <li>
+      <%= link_to "Delete line", line_path(@line), method: :delete, class: "btn my-btn"  %>
+    </li>
+  </ul>
+</div>
