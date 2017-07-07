@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  # ATTACHINARY
+  mount Attachinary::Engine => "/attachinary"
+
   # ADMINISTRATORS:
   resources :administrators, only: [:new, :create, :destroy]
 

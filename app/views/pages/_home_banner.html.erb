@@ -1,0 +1,23 @@
+<div class="container banner">
+  <%= image_tag "inline_logo_white.png", class: "banner-logo" %>
+  <div class="row banner-middle">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Never wait in line again</h1>
+
+      <!-- LINE SEARCH BAR -->
+      <div class="search events">
+        <%= form_tag('/lines', method: 'get',  class:'home-search' ) do  %>
+          <%= text_field_tag :search_value, params[:search_value], placeholder: 'Find your line' , class: "home-search-input" %>
+          <%= submit_tag 'Search', class: 'btn my-btn search-btn' %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row banner-bottom">
+    <div class="col-md-6 col-md-offset-3">
+      <%= link_to 'Sign in / Sign up', new_user_session_path, class: "already-member" %>
+    </div>
+  </div>
+</div>

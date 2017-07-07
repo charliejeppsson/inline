@@ -1,9 +1,13 @@
 
-<!-- BANNER WITH GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON -->
-<div class="container">
-  <div class="row text-center">
-    <h1><%= @line.title %></h1>
-    <%= render partial: 'time_left' %>
-    <%= render partial: 'line_buttons' %>
-  </div>
+<!-- BANNER WITH UPLOADED PHOTO-->
+<% if @line.photo? %>
+  <div class="line-banner" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%), url('<%= cl_image_path @line.photo.path, crop: :fill %>');">
+<% else %>
+  <div class="line-banner" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%), url(<%= image_url('airport-line-3.png') %>);">
+<% end %>
+  <h1><%= @line.title %></h1>
+  <!-- TICKING TIMER UNTIL EITHER LINE OVER OR USER'S TURN -->
+  <%= render partial: 'time_left' %>
+  <!-- GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON, DEPENDING ON USER -->
+  <%= render partial: 'line_buttons' %>
 </div>

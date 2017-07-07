@@ -18,11 +18,15 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'coffee-rails'
 gem 'rails-assets-bootstrap3-datepicker', source: 'https://rails-assets.org'
 
 # Added
 gem 'omniauth-facebook'
+gem 'cloudinary', '1.1.7'
+gem 'attachinary', github: 'assembler/attachinary'
+gem 'jquery-fileupload-rails'
+gem 'coffee-rails'
+
 
 group :development, :test do
   gem 'better_errors'

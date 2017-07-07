@@ -3,18 +3,20 @@
 
 <!-- TAB PANEL WITH LINKS TO SUB-PAGES -->
 <div class="container text-center">
-  <div class="tabs">
-    <!-- LINE ADMINS, ONLY VISIBLE TO THE LINE HOST -->
-    <% if current_user.id == @line.user_id %>
-      <a class="tab active" data-target="#line_admins">line admins</a>
-      <a class="tab" data-target="#line_info">line info</a>
-      <a class="tab" data-target="#current_line">current line</a>
-      <a class="tab" data-target="#directions">directions</a>
-    <% else %>
-      <a class="tab active" data-target="#line_info">line info</a>
-      <a class="tab" data-target="#current_line">current line</a>
-      <a class="tab" data-target="#directions">directions</a>
-    <% end %>
+  <div class="row tabs">
+
+      <!-- LINE ADMINS, ONLY VISIBLE TO THE LINE HOST -->
+      <% if @user_is_host %>
+        <a class="tab active" data-target="#line_admins">Line admins</a>
+        <a class="tab" data-target="#line_info">Line info</a>
+        <a class="tab" data-target="#current_line">Current line</a>
+        <a class="tab" data-target="#directions">Directions</a>
+      <% else %>
+        <a class="tab active" data-target="#line_info">Line info</a>
+        <a class="tab" data-target="#current_line">Current line</a>
+        <a class="tab" data-target="#directions">Directions</a>
+      <% end %>
+
   </div>
 </div>
 

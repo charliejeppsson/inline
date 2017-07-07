@@ -25,6 +25,15 @@ class LinesController < ApplicationController
       admin.user == current_user ? @user_is_admin = true : @user_is_admin = false
     end
 
+    # CHECK IF CURRENT USER IS IN LINE
+    @user = current_user
+    @user_in_line = false
+    @appointment = nil
+
+    @current_line.each do |app|
+      app.user == @user ? @user_in_line = true && @app = app : @user_in_line = false
+    end
+
     # USER SEARCH FUNCTION
     if params.has_key?(:search_value) and params[:search_value] != ""
       @results = User.user_search(params[:search_value])
@@ -33,41 +42,23 @@ class LinesController < ApplicationController
     end
   end
 
-  # def line_info
-  # end
-
-  # def current_line
-  #   @line = Line.find(params[:line_id])
-  #   # CREATE AN ARRAY WITH APPOINTMENTS LISTED ACCORDING TO CREATED_AT
-  #   @current_line = @line.appointments.order("created_at ASC")
-  # end
-
-  # def line_directions
-  # end
-
-  # def line_admins
-  #   @line = Line.find(params[:line_id])
-  #   # CREATE AN ARRAY WITH ADMINISTRATORS LISTED ACCORDING TO CREATED_AT
-  #   @admins = @line.administrators.order("created_at ASC")
-  # end
-
   def new
     @line = Line.new
   end
 
   def create
 
-    start_t = params[:line][:start_time]
-    end_t = params[:line][:end_time]
+    # start_t = params[:line][:start_time]
+    # end_t = params[:line][:end_time]
 
-    if start_t != "" && end_t != ""
-      start_p =  DateTime.strptime(start_t, "%m/%d/%Y %H:%M %p")
-      end_p = DateTime.strptime(end_t, "%m/%d/%Y %H:%M %p")
-    end
+    # if start_t != "" && end_t != ""
+    #   start_p =  DateTime.strptime(start_t, "%m/%d/%Y %H:%M %p")
+    #   end_p = DateTime.strptime(end_t, "%m/%d/%Y %H:%M %p")
+    # end
 
     @line = Line.new(line_params)
-    @line.start_time = start_p
-    @line.end_time = end_p
+    # @line.start_time = start_p
+    # @line.end_time = end_p
 
     if @line.save
       redirect_to lines_path
@@ -127,7 +118,7 @@ class LinesController < ApplicationController
   end
 
   def line_params
-    params.require(:line).permit(:title, :organization_name, :location, :start_time, :end_time, :avg_service_time)
+    params.require(:line).permit(:title, :organization_name, :location, :start_time, :end_time, :avg_service_time, :user_id, :photo)
   end
 
   def require_login
@@ -136,4 +127,5 @@ class LinesController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+
 end
