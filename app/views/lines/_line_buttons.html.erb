@@ -4,12 +4,12 @@
   <% if user_signed_in? %>
     <% if @user_in_line %>
       <!-- IF USER SIGNED IN AND IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
-      <%= link_to "Drop out of line", appointment_path(@app), method: :delete, data: {confirm: "Are you sure? You will lose your place in the line."}, class: "btn my-btn" %>
+      <%= link_to "Drop out of line", appointment_path(@app), method: :delete, data: {confirm: "Are you sure? You will lose your place in the line."}, class: "btn my-btn line-update" %>
     <% else %>
       <!-- IF USER EITHER NOT SIGNED IN OR NOT IN LINE, SHE SEES DROP-OUT-OF-LINE BUTTON -->
-      <%= link_to "Get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn"  %>
+      <%= link_to "Get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn line-update"  %>
     <% end %>
   <% else %>
-    <%= link_to "Get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn"  %>
+    <%= link_to "Get in line", line_get_in_line_path(@line), method: :get, class: "btn my-btn line-update" %>
   <% end %>
 </div>

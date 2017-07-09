@@ -3,10 +3,25 @@ class LinesController < ApplicationController
   before_action :require_login, only: [:new, :create, :get_in_line]
 
   def index
+    # SEARCH FEATURE AND GEOLOCATION CONFIG
     if params.has_key?(:search_value) and params[:search_value] != ""
       @results = Line.line_search(params[:search_value])
+      @hash = Gmaps4rails.build_markers(@results) do |line, marker|
+        marker.lat line.latitude
+        marker.lng line.longitude
+      end
     else
-      @lines = Line.all
+      @results = Line.all
+      @hash = Gmaps4rails.build_markers(@results) do |line, marker|
+        if line.latitude
+          marker.lat line.latitude
+          marker.lng line.longitude
+        else
+          marker.lat '41.4089506'
+          marker.lng '2.1523962'
+          # CHANGE!
+        end
+      end
     end
   end
 
@@ -39,6 +54,20 @@ class LinesController < ApplicationController
       @results = User.user_search(params[:search_value])
     else
       @users = User.all
+    end
+
+    # GEOLOCATION CONFIG
+    @alert_message = "You are viewing #{@line.title}"
+    @line_coordinates = [@line]
+    @hash = Gmaps4rails.build_markers(@line_coordinates) do |line, marker|
+      if line.latitude
+        marker.lat line.latitude
+        marker.lng line.longitude
+      else
+        marker.lat '41.4089506'
+        marker.lng '2.1523962'
+        # CHANGE!
+      end
     end
   end
 

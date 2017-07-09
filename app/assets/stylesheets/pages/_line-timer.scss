@@ -1,0 +1,13 @@
+
+#clockdiv {
+  color: $white;
+  display: inline-block;
+  text-align: center;
+  font-size: 50px;
+}
+#clockdiv div > span {
+  padding: 15px;
+}
+.smalltext {
+  font-size: 20px;
+}

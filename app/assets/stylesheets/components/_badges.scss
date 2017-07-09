@@ -3,7 +3,10 @@
   font-size: 25px;
   line-height: 30px;
   width: 30px;
-  color: gray;
+  color: $lightgray;
+}
+.badge-container:hover {
+  color: $white;
 }
 .badge {
   position: absolute;

@@ -2,8 +2,10 @@
   font-family: $base-font;
   background: transparent;
   display: flex;
+  width: 100%;
   justify-content: center;
-  padding: 0px 10px 0 10px
+  position: absolute;
+  bottom: 0;
 }
 .tabs a {
   color: white;
@@ -24,15 +26,15 @@
 }
 .tab {
   background: #2F2F2F;
-  flex: 0 0 25%;
+  flex: 1 0;
   text-align: center;
   padding: 20px 0;
 }
 .tab:first-child {
-  border-radius: 0 0 0 10px;
+  border-radius: 10px 0 0 0;
 }
 .tab:last-child {
-  border-radius: 0 0 10px 0;
+  border-radius: 0 10px 0 0;
 }
 .tab.active {
   background: #D0CCD0;

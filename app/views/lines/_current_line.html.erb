@@ -14,7 +14,7 @@
         <ul class="list-inline appointment-list-controls">
           <!-- IF CURRENT USER IS THE HOST OR AN ADMIN, SHE CAN REMOVE A USER FROM THE LINE -->
           <% if @user_is_host || @user_is_admin %>
-            <li><%= link_to "", appointment_path(appointment), method: :delete, class: "fa fa-check", title: "Appointment done" %></li>
+            <li><%= link_to "", appointment_path(appointment), method: :delete, class: "fa fa-check line-update", title: "Appointment done" %></li>
           <% end %>
         </ul>
       </div>

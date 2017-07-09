@@ -27,15 +27,6 @@
   font-weight: lighter;
   color: rgba(255, 255, 255, 0.7);
 }
-.my-btn {
-  font-family: $base-font;
-  background-color: #D16014;
-  color: white;
-}
-.my-btn:hover {
-  background-color: #CC5404;
-  color: white;
-}
 .banner-bottom {
   margin-top: 120px;
 }
@@ -96,11 +87,11 @@
   position: relative;
 }
 .home-search-btn {
-  line-height: 40px;
-  color: #E6E6E6;
-  border: none;
-  background: #D16014;
-  position: absolute;
+  margin-left: 5px;
+  border: 0;
+}
+.home-search-btn:hover {
+  border: 0;
 }
 .home-search-input {
   flex: 0 1 300px;
@@ -116,7 +107,4 @@
 }
 .home-search-input:focus  {
   border: 1px solid #CCCCCC;
-}
-.search-btn {
-  margin-left: 5px;
 }

@@ -9,15 +9,6 @@ User.destroy_all
 
 puts 'Creating users...'
 
-# admins
-User.create(
-  email: "charlie.jeppsson1@gmail.com",
-  first_name: "Charlie",
-  last_name: "Jeppsson",
-  age: 26,
-  password: "12345678"
-)
-
 # line hosts
 User.create(
   email: "doctor@house.com",
@@ -122,7 +113,7 @@ User.create(
 
 puts 'Creating lines...'
 
-Line.create(
+line = Line.create(
   title: "Doctor House's Patient Line",
   organization_name: "Hospital XYZ",
   location: "Wall Street 100, Manhattan, New York, USA",
@@ -130,7 +121,11 @@ Line.create(
   avg_service_time: 20,
   user_id: User.where(email: "doctor@house.com").first.id
 )
-Line.create(
+line.save!
+url = "app/assets/images/house.jpg"
+line.photo_url = url
+
+line = Line.create(
   title: "Elon Musk's Interviewer Line",
   organization_name: "SpaceX",
   location: "Rocket Road, Hawthorne, California, USA",
@@ -138,7 +133,11 @@ Line.create(
   avg_service_time: 10,
   user_id: User.where(email: "elon@musk.com").first.id
 )
-Line.create(
+line.save!
+url = "app/assets/images/elon.jpg"
+line.photo_url = url
+
+line = Line.create(
   title: "Chase Bank Williamsburg's Customer Service Line",
   organization_name: "Chase Bank",
   location: "110 S 8th St, Brooklyn, New York, USA",
@@ -146,6 +145,9 @@ Line.create(
   avg_service_time: 15,
   user_id: User.where(email: "branch@manager.com").first.id
 )
+line.save!
+url = "app/assets/images/bank.jpg"
+line.photo_url = url
 
 
 puts 'Creating appointments...'

@@ -10,16 +10,25 @@
   padding-bottom: 5em;
 }
 
-// Backgrounds
-.bg-black {
-  background: #4a4a4a;
+// BUTTONS
+.my-btn {
+  font-family: $base-font;
+  background-color: #D16014;
+  color: $white;
 }
-.bg-grey {
-  background: #aeaeae;
+.my-btn:hover {
+  background-color: #CC5404;
+  color: $white;
+  border: 1px solid $orange;
 }
-.bg-blue {
-  background: #00a3e1;
+.btn-red {
+  font-family: $base-font;
+  background-color: $red;
+  color: $white;
+  margin-top: 20px;
 }
-.bg-dark-blue {
-  background: #3b5998;
+.btn-red:hover {
+  background-color: #C61414;
+  color: $white;
+  border: 1px solid $red;
 }

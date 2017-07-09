@@ -10,4 +10,19 @@
   <%= render partial: 'time_left' %>
   <!-- GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON, DEPENDING ON USER -->
   <%= render partial: 'line_buttons' %>
+
+  <!-- TAB PANEL WITH LINKS TO SUB-PAGES -->
+  <div class="tabs">
+    <% if @user_is_host %>
+      <a class="tab active" data-target="#line_admins">Line admins</a>
+      <a class="tab" data-target="#line_info">Line info</a>
+      <a class="tab" data-target="#current_line">Current line</a>
+      <a class="tab" data-target="#line_directions">Directions</a>
+      <a class="tab" data-target="#line_settings">Settings</a>
+    <% else %>
+      <a class="tab active" data-target="#line_info">Line info</a>
+      <a class="tab" data-target="#current_line">Current line</a>
+      <a class="tab" data-target="#line_directions">Directions</a>
+    <% end %>
+  </div>
 </div>

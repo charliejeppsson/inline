@@ -6,9 +6,9 @@
 
       <!-- LINE SEARCH BAR -->
       <div class="search events">
-        <%= form_tag('/lines', method: 'get',  class:'home-search' ) do  %>
+        <%= form_tag('/lines', method: 'get',  class: 'home-search' ) do  %>
           <%= text_field_tag :search_value, params[:search_value], placeholder: 'Find your line' , class: "home-search-input" %>
-          <%= submit_tag 'Search', class: 'btn my-btn search-btn' %>
+          <%= submit_tag 'Search', class: 'btn my-btn home-search-btn' %>
         <% end %>
       </div>
 

@@ -2,18 +2,57 @@
 <!-- ESTIMATING TIME LEFT OF LINE, NO CONDITIONS: -->
 <div class="col-xs-12 col-md-4 col-md-offset-4">
 
-  <!-- IF USER SIGNED IN AND IN LINE WE CALCULATE HER TIME LEFT -->
-  <% if @user_in_line %>
-    <% @current_line.each_with_index do |appointment, index| %>
-      <% if appointment.user_id == current_user.id %>
-        <% @current_user_position = index %>
-      <% end %>
+  <!-- CALLING JS INITIALIZECLOCK METHOD AND PASSING THE DEADLINE TO IT  -->
+  <% content_for(:after_js) do %>
+    <%= javascript_tag do %>
+      $(document).ready(function() {
+
+        <!-- CALCULATE EST TIME LEFT IN MINUTES AND TURN INTO TIMEDATE OBJECT -->
+        <% line = @line.to_json %>
+        <% line = JSON.parse(line) %>
+        <% appointments = @line.appointments.order("created_at ASC").to_json %>
+        <% appointments = JSON.parse(appointments) %>
+        <% people_in_front = people_in_front(appointments) %>
+        <% avg_service_time = line["avg_service_time"].to_i %>
+        <% est_time_left = people_in_front * avg_service_time * 60 %>
+        <% end_time = Time.now + est_time_left %>
+        <!-- STORE TIME IN JS VARIABLE -->
+
+        var deadline = new Date(<%= end_time.to_f * 1000 %>);
+        initializeClock('clockdiv', deadline);
+
+
+
+      });
     <% end %>
-    <% people_in_front = @current_line[0..@current_user_position-1].count %>
-  <% else %>
-    <% people_in_front = @current_line.count %>
   <% end %>
 
-  <h2>Est. time left <%= people_in_front * @line.avg_service_time %> minutes.</h2>
+
+  <!-- CLOCK TIMER OUTPUT FOR JS INITIALIZECLOCK METHOD -->
+  <div id="clockdiv">
+    <ul class="list-inline">
+      <li>
+        <span class="days"></span>
+        <div class="smalltext">Days</div>
+      </li>
+      <li>
+        <span class="hours"></span>
+        <div class="smalltext">Hours</div>
+      </li>
+      <li>
+        <span class="minutes"></span>
+        <div class="smalltext">Minutes</div>
+      </li>
+      <li>
+        <span class="seconds"></span>
+        <div class="smalltext">Seconds</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="hidden" id="empty-line">
+    <h2>This line is currently empty.</h2>
+  </div>
+
 </div>
 
