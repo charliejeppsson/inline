@@ -7,66 +7,53 @@
     <%= javascript_tag do %>
       $(document).ready(function() {
 
-        <!-- CALCULATE EST TIME LEFT IN MINUTES AND TURN INTO TIMEDATE OBJECT -->
+        <!-- TURN LINE AND APPOINTMENTS INTO JSON STRINGS, SINCE JS CAN'T HANDLE RUBY OBJECTS -->
         <% line = @line.to_json %>
         <% line = JSON.parse(line) %>
         <% appointments = @line.appointments.order("created_at ASC").to_json %>
         <% appointments = JSON.parse(appointments) %>
-        <% people_in_front = people_in_front(appointments) %>
-        <% avg_service_time = line["avg_service_time"].to_i %>
-        <% est_time_left = people_in_front * avg_service_time * 60 %>
-        <% end_time = Time.now + est_time_left %>
-        <!-- STORE TIME IN JS VARIABLE -->
 
-        var deadline = new Date(<%= end_time.to_f * 1000 %>);
-        initializeClock('clockdiv', deadline);
-
-        <!-- WHEN PAGE IS REFRESHED OR JUST ARRIVED ON, WE WANT IT TO RETRIEVE THE LAST COUNT IT WAS ON AND DISPLAY THAT COUNT, I.E. NOT RESET. NOTE THAT THE CURRENT COUNT IS STORED IN GETTIMEREMAINING METHOD EVERY SECOND. HENCE WE WANT TO CALL THE LAST VALUES OF THE UPDATECLOCK METHOD AND PASS TO INITIALIZECLOCK -->
-        if (<%= appointments.empty? %>) {
-          $("empty-line").removeClass("hidden");
-        } else {
-          function storeCurrentCount(count) {
-            var currentCount = count;
-          }
+        <!-- IF THE LINE IS NOT EMPTY, CALCULATE END_TIME AND SEND TO JS METHODS -->
+        if (<%= appointments.count != 0 %>) {
+          <% people_in_front = people_in_front(appointments) %>
+          <% avg_service_time = line["avg_service_time"].to_i %>
+          <% est_time_left = people_in_front * avg_service_time * 60 %>
+          <% end_time = Time.now + est_time_left %>
           var deadline = new Date(<%= end_time.to_f * 1000 %>);
-          initializeClock('clockdiv', count);
+          initializeClock('clockdiv', deadline);
+
+        } else {
+          $("#empty-line").removeClass("hidden");
         }
 
-        <!-- DEFINE FUNCTION FOR ENABLING JQUERY LINE-UPDATE CLICK ACTION -->
-        <!-- function updateEndtime() { -->
-          <!-- CALL HELPER METHOD TO GET CURRENT PEOPLE IN FRONT OF USER IN THE LINE -->
-          <%#= people_in_front = people_in_front(@line) %>
-          <!-- CALCULATE EST TIME LEFT IN MINUTES AND TURN INTO TIMEDATE OBJECT -->
-          <%#= est_time_left = people_in_front * @line.avg_service_time * 60 %>
-          <%#= end_time = Time.now + est_time_left %>
-          <!-- STORE TIME IN JS VARIABLE -->
-          <!-- var deadline = new Date(<%#= end_time.to_f * 1000 %>); -->
+        <!-- NOT DRY CODE, FIX!!  -->
+        <!-- IF A USER IS REMOVED, DROPS OUT OR JOINS THE LINE WE UPDATE THE TIMER -->
+        $(".line-update").on("click", function(e){
+          <% line = @line.to_json %>
+          <% line = JSON.parse(line) %>
+          <% appointments = @line.appointments.order("created_at ASC").to_json %>
+          <% appointments = JSON.parse(appointments) %>
+
+          if (<%= appointments.count != 0 %>) {
+            <% people_in_front = people_in_front(appointments) %>
+            <% avg_service_time = line["avg_service_time"].to_i %>
+            <% est_time_left = people_in_front * avg_service_time * 60 %>
+            <% end_time = Time.now + est_time_left %>
+            var deadline = new Date(<%= end_time.to_f * 1000 %>);
+            initializeClock('clockdiv', deadline);
+
+          } else {
+            $("#empty-line").removeClass("hidden");
+          }
+        });
 
       });
     <% end %>
   <% end %>
 
-
   <!-- CLOCK TIMER OUTPUT FOR JS INITIALIZECLOCK METHOD -->
   <div id="clockdiv">
-    <ul class="list-inline">
-      <li>
-        <span class="days"></span>
-        <div class="smalltext">Days</div>
-      </li>
-      <li>
-        <span class="hours"></span>
-        <div class="smalltext">Hours</div>
-      </li>
-      <li>
-        <span class="minutes"></span>
-        <div class="smalltext">Minutes</div>
-      </li>
-      <li>
-        <span class="seconds"></span>
-        <div class="smalltext">Seconds</div>
-      </li>
-    </ul>
+    <h2 class="hours"></h2>
   </div>
 
   <div class="hidden" id="empty-line">

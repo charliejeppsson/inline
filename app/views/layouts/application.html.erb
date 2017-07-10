@@ -11,6 +11,7 @@
   <body>
     <!-- TO SHOW NAVBAR EVERYWHERE EXCEPT HOME PAGE -->
     <% if content_for :full_page %>
+      <%= render 'shared/flashes' %>
       <%= yield :full_page %>
       <%= render "shared/footer" %>
     <% elsif current_user.nil? %>

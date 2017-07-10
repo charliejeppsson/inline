@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 gem 'devise'
+gem 'pundit'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
@@ -28,6 +29,7 @@ gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
 gem 'geocoder'
 gem 'gmaps4rails'
+
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

@@ -4,10 +4,10 @@ module ApplicationHelper
   def people_in_front(current_line)
     # CHECK IF CURRENT USER IS IN LINE
     user_in_line = false
-    appointment = nil
-
     current_line.each do |app|
-      app["user_id"] == current_user.id ? user_in_line = true && app = app : user_in_line = false
+      if app["user_id"] == current_user.id
+        user_in_line = true
+      end
     end
 
     current_user_position = nil
