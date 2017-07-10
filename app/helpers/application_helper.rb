@@ -7,15 +7,15 @@ module ApplicationHelper
     appointment = nil
 
     current_line.each do |app|
-      app[:user_id] == current_user.id ? user_in_line = true && app = app : user_in_line = false
+      app["user_id"] == current_user.id ? user_in_line = true && app = app : user_in_line = false
     end
 
     current_user_position = nil
 
     if user_in_line
       current_line.each_with_index do |appointment, index|
-        if appointment[:user_id] == current_user.id
-          current_user_position = index.to_i
+        if appointment["user_id"].to_i == current_user.id
+          current_user_position = index
         end
       end
       people_in_front = current_line[0..current_user_position-1].count

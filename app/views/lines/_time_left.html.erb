@@ -21,7 +21,26 @@
         var deadline = new Date(<%= end_time.to_f * 1000 %>);
         initializeClock('clockdiv', deadline);
 
+        <!-- WHEN PAGE IS REFRESHED OR JUST ARRIVED ON, WE WANT IT TO RETRIEVE THE LAST COUNT IT WAS ON AND DISPLAY THAT COUNT, I.E. NOT RESET. NOTE THAT THE CURRENT COUNT IS STORED IN GETTIMEREMAINING METHOD EVERY SECOND. HENCE WE WANT TO CALL THE LAST VALUES OF THE UPDATECLOCK METHOD AND PASS TO INITIALIZECLOCK -->
+        if (<%= appointments.empty? %>) {
+          $("empty-line").removeClass("hidden");
+        } else {
+          function storeCurrentCount(count) {
+            var currentCount = count;
+          }
+          var deadline = new Date(<%= end_time.to_f * 1000 %>);
+          initializeClock('clockdiv', count);
+        }
 
+        <!-- DEFINE FUNCTION FOR ENABLING JQUERY LINE-UPDATE CLICK ACTION -->
+        <!-- function updateEndtime() { -->
+          <!-- CALL HELPER METHOD TO GET CURRENT PEOPLE IN FRONT OF USER IN THE LINE -->
+          <%#= people_in_front = people_in_front(@line) %>
+          <!-- CALCULATE EST TIME LEFT IN MINUTES AND TURN INTO TIMEDATE OBJECT -->
+          <%#= est_time_left = people_in_front * @line.avg_service_time * 60 %>
+          <%#= end_time = Time.now + est_time_left %>
+          <!-- STORE TIME IN JS VARIABLE -->
+          <!-- var deadline = new Date(<%#= end_time.to_f * 1000 %>); -->
 
       });
     <% end %>

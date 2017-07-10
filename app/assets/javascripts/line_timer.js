@@ -34,8 +34,14 @@ function initializeClock(id, endtime) {
     }
   }
 
+  // // ACTIVATE THE CLICK ACTION, MAKING JQUERY RESPONSIVE TO ANY CHANGES IN THE LINE
+  // $(".line-update").on("click", function(e){
+  //   // STORE TIME IN JS VARIABLE
+  //   deadline = updateEndtime();
+  //   // PASS TO MAIN JS TIMER METHOD
+  //   initializeClock('clockdiv', deadline);
+  // });
+
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
 }
-
-
