@@ -70,8 +70,31 @@
 }
 .li-time {
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 10px;
+  font-family: $base-font;
+  text-align: center;
+}
+.time-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding-top: 10px;
+}
+.two-plus-hours {
+  background-color: $red;
+}
+.two-hours {
+  background-color: $orange;
+}
+.one-five-hours {
+  background-color: $yellow;
+}
+.one-hour {
+  background-color: $blue;
+}
+.half-hour {
+  background-color: $green;
 }
 .line-li-data {
   font-size: 15px;

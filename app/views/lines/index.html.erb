@@ -38,6 +38,24 @@
                         </table>
                       </div>
                     </li>
+                    <li>
+                      <%#= render partial: 'time_left_avatar' %>
+                      <% people_in_front = line.appointments.count %>
+                      <% est_time_left = people_in_front * line.avg_service_time %>
+                      <div class="li-time">
+                        <% if est_time_left > 120 %>
+                          <div class="time-avatar two-plus-hours" title="Hours left">2h+</div>
+                        <% elsif est_time_left <= 135 && est_time_left > 105 %>
+                          <div class="time-avatar two-hours" title="Hours left">2h</div>
+                        <% elsif est_time_left <= 105 && est_time_left > 75 %>
+                          <div class="time-avatar one-five-hours" title="Hours left">1.5h</div>
+                        <% elsif est_time_left <= 75 && est_time_left > 45 %>
+                          <div class="time-avatar one-hour" title="Hours left">1h</div>
+                        <% else %>
+                          <div class="time-avatar half-hour" title="Hours left">0.5h</div>
+                        <% end %>
+                      </div>
+                    </li>
                     <a href="<%= line_path(line) %>" class="line-list-link"></a>
                   </div>
 
@@ -54,8 +72,133 @@
           <% content_for(:after_js) do %>
             <%= javascript_tag do %>
               $(document).ready(function() {
+                <!-- SNAZZYMAPS MAP STYLE -->
+                var styles = [ {
+                    "featureType": "administrative",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": "-100"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.province",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 65
+                        },
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": "50"
+                        },
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": "-100"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "lightness": "30"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "lightness": "40"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "hue": "#ffff00"
+                        },
+                        {
+                            "lightness": -25
+                        },
+                        {
+                            "saturation": -97
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels",
+                    "stylers": [
+                        {
+                            "lightness": -25
+                        },
+                        {
+                            "saturation": -100
+                        }
+                    ]
+                }
+            ];
                 var handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map' }, provider:{ scrollwheel: false } }, function() {
+                handler.buildMap({ internal: { id: 'map' }, provider:{ styles: styles, scrollwheel: false } }, function() {
                   markers = handler.addMarkers(<%= raw @hash.to_json %>);
                   handler.bounds.extendWith(markers);
                   handler.fitMapToBounds();
