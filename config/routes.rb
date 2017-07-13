@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   # CHAT FEATURE
-  get 'rooms/show'
+  get 'home/index'
+
   mount ActionCable.server => '/cable' # Serve web socket cable requests in process
 
   # ATTACHINARY

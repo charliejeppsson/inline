@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :lines, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_many :administrators, dependent: :destroy
+  has_many :messages
+  has_many :conversations, foreign_key: :sender_id
 
   validates :first_name, :last_name, :email, presence: true
 
