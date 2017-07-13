@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
 
+  get 'messages/create'
+
   get 'conversations/create'
 
   # CHAT FEATURE
   get 'home/index'
-  resources :conversations, only: [:create]
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+
+    resources :messages, only: [:create]
+  end
 
   mount ActionCable.server => '/cable' # Serve web socket cable requests in process
 

@@ -10,6 +10,17 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def close
+    @conversation = Conversation.find(params[:id])
+    authorize @conversation
+
+    session[:conversations].delete(@conversation.id)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def add_to_conversations

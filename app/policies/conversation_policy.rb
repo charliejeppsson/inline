@@ -16,4 +16,8 @@ class ConversationPolicy < ApplicationPolicy
   def create?
     return true
   end
+
+  def close?
+    return true
+  end
 end
