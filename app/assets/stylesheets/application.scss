@@ -19,13 +19,23 @@
 
 
 // Global rules
-body {
+html {
+  position:relative;
+  min-height: 100%;
+}
+html, body {
   background-color: $white;
   color: $darkgray;
+  margin: 0;
+  padding:0;
 }
 h1, h2, h3, h4 {
   font-family: $header-font;
 }
 p {
   font-family: $base-font;
+}
+ul {
+  padding-left: 0px;
+  list-style: none;
 }
