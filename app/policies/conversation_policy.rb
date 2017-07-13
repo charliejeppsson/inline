@@ -1,4 +1,4 @@
-class RoomPolicy < ApplicationPolicy
+class ConversationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope
