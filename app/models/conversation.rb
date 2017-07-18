@@ -21,4 +21,15 @@ class Conversation < ApplicationRecord
   def opposed_user(user)
     user == recipient ? sender : recipient
   end
+
+  def read_by_recipient(user, conversation)
+    conversation.messages.each do |message|
+      # IF USER THAT SEES THE MESSAGE IS NOT THE CREATOR OF THE MESSAGE AND HAS NOT SEEN IT...
+      if user.id != message.user_id && message.read_status == false
+        # ...MARK THE MESSAGE AS READ
+        message.read_status = true
+        message.save
+      end
+    end
+  end
 end

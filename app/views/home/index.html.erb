@@ -1,5 +1,45 @@
-<div class="row" style="margin-bottom: 180px;">
-  <div class="col-md-9">
+<div class="row" style="margin: 30px 50px 180px 50px">
+  <div class="col-xs-12 col-md-4">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Your conversations</h3>
+      </div>
+      <div class="panel-body">
+        <!-- LIST ALL CURRENT CHAT PARTNERS -->
+        <% my_conversations = Conversation.where(["recipient_id = ? or sender_id = ?", current_user.id, current_user.id]).each do |conversation| %>
+          <% conversation.sender != current_user ? user = conversation.sender : user = conversation.recipient %>
+          <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+          <div class="appointment-list">
+            <%= image_tag avatar_url, class: "appointment-list-avatar" %>
+            <div class='appointment-list-body'>
+              <ul class="list-inline" style="margin: 0;">
+                <li style="height: 100%;">
+                  <h4> <%= link_to "#{user.first_name} #{user.last_name}", conversations_path(user_id: user), remote: true, method: :post, class: "name-link" %> </h4>
+                </li>
+                <!-- ADD BADGE WITH AMOUNT OF UNREAD MESSAGES -->
+                <% unread_messages = [] %>
+                <% conversation.messages.each do |message| %>
+                  <% if message.read_status == false && message.user_id != current_user.id %>
+                    <% unread_messages << message %>
+                  <% end %>
+                <% end %>
+                <% if unread_messages.count > 0 %>
+                  <li style="height: 100%;">
+                    <div class="con-badge">
+                      <%= unread_messages.count %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-8">
+    <!-- LIST ALL CURRENT CONVERSATIONS AND THEIR CONTENT -->
     <ul id="conversations-list">
       <% @conversations.each do |conversation| %>
         <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
@@ -7,18 +47,4 @@
     </ul>
   </div>
 
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">User list</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-          <% @users.each do |user| %>
-            <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
