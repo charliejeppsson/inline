@@ -1,0 +1,57 @@
+.panel {
+
+}
+.panel-heading {
+  background-color: $darkgray;
+}
+.panel-title {
+  color: $white;
+  font-family: $header-font;
+  font-size: 16px;
+}
+.toggle-window {
+  text-decoration: none !important;
+  color: $white !important;
+}
+.toggle-window:hover {
+  text-decoration: none;
+  color: $white;
+}
+.name-link {
+  color: $black;
+  font-family: $header-font;
+  font-size: 16px;
+  text-decoration: none !important;
+}
+.name-link:hover {
+  text-decoration: none;
+  color: $black;
+}
+.panel-body {
+  background-color: #E0E0E0;
+}
+.btn-cross {
+  background-color: transparent;
+  font-size: 12px;
+  color: $white;
+}
+.btn-cross:hover {
+  color: $lightgray;
+  text-decoration: none;
+}
+.send-message {
+  margin-top: 10px;
+}
+.con-badge {
+  font-size: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background: #EE5F5B;
+}

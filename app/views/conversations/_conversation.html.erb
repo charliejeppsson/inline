@@ -1,22 +1,23 @@
 
 <li>
-  <div class="panel panel-default" data-conversation-id="<%= conversation.id %>">
+  <div class="panel" data-conversation-id="<%= conversation.id %>">
     <div class="panel-heading">
-      <%= link_to conversation.opposed_user(user).email, '', class: 'toggle-window' %>
-      <%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %>
+      <% full_name = conversation.opposed_user(user).first_name + " " + conversation.opposed_user(user).last_name %>
+      <%= link_to full_name, '', onclick: conversation.read_by_recipient(current_user, conversation), class: 'toggle-window panel-title' %>
+      <%= link_to "X", close_conversation_path(conversation), class: "btn btn-xs pull-right btn-cross", remote: true, method: :post %>
     </div>
 
     <div class="panel-body" style="display: none;">
       <div class="messages-list">
         <ul>
-          <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+          <%= render 'conversations/conversation_content', messages: conversation.messages.order("created_at ASC"), user: user %>
         </ul>
       </div>
       <form class="new_message">
         <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
         <input name="user_id" type="hidden" value="<%= user.id %>">
-        <textarea name="body" class="form-control"></textarea>
-        <input type="submit" class="btn btn-success" value="Send">
+        <textarea name="body" class="form-control text-area"></textarea>
+        <input type="submit" class="btn my-btn btn-block send-message" value="Send">
       </form>
     </div>
   </div>

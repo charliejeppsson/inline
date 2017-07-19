@@ -1,11 +1,13 @@
 //= require action_cable
 //= require_self
 
+// DEFINING THE ACTION CABLE APP
 (function() {
   this.App || (this.App = {});
   App.cable = ActionCable.createConsumer();
 }).call(this);
 
+// CONNECTING THE CHAT CLIENT TO SERVER FUNCTIONALITY
 App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   connected: function() {},
   disconnected: function() {},
@@ -23,9 +25,23 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
     });
   }
 });
+
+// MESSAGE SUBMIT CONFIG
 $(document).on('submit', '.new_message', function(e) {
   e.preventDefault();
   var values = $(this).serializeArray();
   App.conversation.speak(values);
   $(this).trigger('reset');
+});
+
+// ALLOWING MESSAGE SUBMISSION WHEN CLICKING ENTER IN THE TEXT AREA
+$(function() {
+    $(".text-area").keypress(function (e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            $('.send-message').click();
+            return false;
+        } else {
+            return true;
+        }
+    });
 });
