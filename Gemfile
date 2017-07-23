@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'rails-assets-bootstrap3-datepicker', source: 'https://rails-assets.org'
+gem 'rails-assets-bootstrap-datetimepicker-3', source: 'https://rails-assets.org'
 
 # Added
 gem 'omniauth-facebook'

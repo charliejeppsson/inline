@@ -3,15 +3,13 @@
 @import "config/variables";
 @import "config/bootstrap_variables";
 
-// Datetimepicker
-@import 'bootstrap3-datepicker';
-
 // External libraries
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "vendor/index";
+@import "bootstrap-datetimepicker-3";
 
 // Your CSS
 @import "layout/index";

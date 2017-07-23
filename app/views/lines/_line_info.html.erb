@@ -14,9 +14,9 @@
       <p>Host: <%= @user.first_name + " " + @user.last_name %></p>
     <% end %>
     <p>Location: <%= @line.location %></p>
-    <p>Start time: <%= @line.start_time %></p>
+    <p>Start time: <%= @line.start_time.to_time.strftime('%B %e at %l:%M %p') %></p>
     <% unless @line.end_time.nil? %>
-      <p>End time: <%= @line.end_time %></p>
+      <p>End time: <%= @line.end_time.to_time.strftime('%B %e at %l:%M %p') %></p>
     <% end %>
     <p>Average service time: <%= @line.avg_service_time %></p>
   </div>

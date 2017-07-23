@@ -2,6 +2,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require bootstrap-datetimepicker-3
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
@@ -25,3 +26,12 @@
     }
   });
 })();
+
+$(document).ready(function() {
+  $('#datetimepicker1').datetimepicker();
+  $('#datetimepicker2').datetimepicker();
+
+  $('#datetimepicker1').on('dp.change', function (e) {
+    $('#datetimepicker2').data('DateTimePicker').minDate(e.date);
+  });
+});

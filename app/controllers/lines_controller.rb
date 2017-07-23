@@ -87,18 +87,18 @@ class LinesController < ApplicationController
 
   def create
 
-    # start_t = params[:line][:start_time]
-    # end_t = params[:line][:end_time]
+    start_t = params[:line][:start_time]
+    end_t = params[:line][:end_time]
 
-    # if start_t != "" && end_t != ""
-    #   start_p =  DateTime.strptime(start_t, "%m/%d/%Y %H:%M %p")
-    #   end_p = DateTime.strptime(end_t, "%m/%d/%Y %H:%M %p")
-    # end
+    if start_t != '' && end_t != ''
+      start_p =  DateTime.strptime(start_t, '%m/%d/%Y %H:%M %p')
+      end_p = DateTime.strptime(end_t, '%m/%d/%Y %H:%M %p')
+    end
 
     @line = Line.new(line_params)
     authorize @line
-    # @line.start_time = start_p
-    # @line.end_time = end_p
+    @line.start_time = start_p
+    @line.end_time = end_p
 
     if @line.save
       redirect_to lines_path
