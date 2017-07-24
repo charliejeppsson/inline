@@ -1,23 +1,68 @@
 
 <!-- LINE INFORMATION, HIDDEN FROM START IF USER IS HOST -->
 <div class="tab-content hidden" id="line_info">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
+  <div class="line-info-wrapper">
+    <div class="container-fluid">
 
-    <%# @lines.photos.each do |photo| %>
-      <%#= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-    <%# end %>
+      <% unless @line.organization_name.nil? %>
+        <div class="row">
+          <div class="col-xs-6 col-md-3 col-md-offset-3">
+            <h4 class="text-left"> Organization: </h4>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <h4 class="text-right"> <%= @line.organization_name %> </h4>
+          </div>
+        </div>
+      <% end %>
 
-    <% unless @line.organization_name.nil? %>
-      <p>Organization: <%= @line.organization_name %></p>
-    <% else %>
       <% user = User.find(@line.user_id) %>
-      <p>Host: <%= @user.first_name + " " + @user.last_name %></p>
-    <% end %>
-    <p>Location: <%= @line.location %></p>
-    <p>Start time: <%= @line.start_time.to_time.strftime('%B %e at %l:%M %p') %></p>
-    <% unless @line.end_time.nil? %>
-      <p>End time: <%= @line.end_time.to_time.strftime('%B %e at %l:%M %p') %></p>
-    <% end %>
-    <p>Average service time: <%= @line.avg_service_time %></p>
+      <div class="row">
+        <div class="col-xs-6 col-md-3 col-md-offset-3">
+          <h4 class="text-left"> Host: </h4>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h4 class="text-right"> <%= user.first_name + " " + user.last_name %> </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-md-3 col-md-offset-3">
+          <h4 class="text-left"> Location: </h4>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h4 class="text-right"> <%= @line.location %> </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-md-3 col-md-offset-3">
+          <h4 class="text-left"> Starts: </h4>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h4 class="text-right"> <%= @line.start_time.to_time.strftime('%B %e at %l:%M %p') %> </h4>
+        </div>
+      </div>
+
+      <% unless @line.end_time.nil? %>
+        <div class="row">
+          <div class="col-xs-6 col-md-3 col-md-offset-3">
+            <h4 class="text-left"> Ends: </h4>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <h4 class="text-right"> <%= @line.end_time.to_time.strftime('%B %e at %l:%M %p') %> </h4>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-xs-6 col-md-3 col-md-offset-3">
+          <h4 class="text-left"> Average service time: </h4>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h4 class="text-right"> About <%= @line.avg_service_time %> minutes </h4>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

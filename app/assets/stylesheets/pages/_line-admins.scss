@@ -1,0 +1,115 @@
+.admin-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+}
+
+// LINE ADMIN USER SEARCH FORM
+.user-search {
+  flex: 0 1 100%;
+  display: flex;
+  padding: 0 10px;
+  position: relative;
+}
+.user-search-btn {
+  margin-left: 5px;
+  border: 0;
+}
+.user-search-btn:hover {
+  border: 0;
+}
+.user-search-input {
+  flex: 0 1 100%;
+  transition: all 0.15s ease;
+  line-height: 40px;
+  font-weight: lighter;
+  color: #666666;
+  border: 1px solid #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 14px;
+  outline: none;
+}
+.user-search-input:focus  {
+  border: 1px solid #CCCCCC;
+}
+
+
+// LIST OF CURRENT LINE ADMINS
+.admin-list {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  width: 100%;
+  margin: 8px;
+}
+
+ // Body design
+.admin-list-body {
+  flex: 1 1 auto;
+}
+.admin-list-body h4 {
+  text-align: left;
+}
+.admin-list-body p {
+  font-weight: lighter;
+  color: #999999;
+  margin-bottom: 0;
+}
+
+// Admin-list avatar
+.admin-list-avatar {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+// Controls design
+.admin-list-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0px;
+}
+.admin-list-controls a {
+  padding: 0 20px;
+  font-size: 17px;
+  color: #E6E6E6;
+}
+.admin-list-controls-big a {
+  font-size: 30px;
+  color: #1A2930;
+}
+.admin-list-controls a:hover {
+  color: $orange !important;
+  text-decoration: none;
+}
+.admin-list-controls-hidden a {
+  color: transparent;
+  font-size: 15px;
+  transition: all 0.15s ease;
+  border-color: transparent;
+}
+
+// Hover effects
+.admin-list:hover {
+  background: white;
+  cursor: pointer;
+}
+.admin-list-upvote:hover, .admin-list-upvote.admin-list-upvote-upvoted {
+  color: #5898f1;
+  cursor: pointer;
+}
+.admin-list-upvote-upvoted .admin-list-arrow {
+  border-bottom-color: #5898f1;
+}
+// .admin-list:hover .admin-list-upvote { transform: scale(1.2) }
+.admin-list:hover .admin-list-controls-hidden a { color: #E6E6E6 }
+.admin-list-upvote:hover .admin-list-arrow { border-bottom: 9px solid #5898f1 }
+
+.hidden-list {
+  text-align: center;
+  margin-top: 125px;
+}

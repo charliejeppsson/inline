@@ -1,5 +1,5 @@
 
-<div class="tab-content" id="line_directions" style="width: 100%; height: 300px;"></div>
+<div class="tab-content <%= @user_is_host ? 'hidden' : '' %>" id="line_directions"></div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>

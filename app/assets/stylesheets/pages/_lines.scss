@@ -115,7 +115,7 @@
   position: relative;
   /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
-  height: 350px;
+  height: 400px;
   background-position: center;
 }
 .line-banner h1 {
@@ -131,8 +131,6 @@
 .line-form {
   font-family: $base-font;
 }
-
 .form-control {
   color: $black !important;
 }
-

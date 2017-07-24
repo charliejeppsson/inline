@@ -161,7 +161,7 @@ class LinesController < ApplicationController
   end
 
   def line_params
-    params.require(:line).permit(:title, :organization_name, :location, :start_time, :end_time, :avg_service_time, :user_id, :photo)
+    params.require(:line).permit(:title, :organization_name, :location, :start_time, :end_time, :avg_service_time, :user_id, :photo, :photo_cache)
   end
 
   def require_login
