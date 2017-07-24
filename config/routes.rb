@@ -16,9 +16,6 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable' # Serve web socket cable requests in process
 
-  # ATTACHINARY
-  mount Attachinary::Engine => "/attachinary"
-
   # ADMINISTRATORS:
   resources :administrators, only: [:new, :create, :destroy]
 

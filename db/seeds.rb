@@ -123,7 +123,8 @@ line = Line.create(
 )
 line.save!
 url = "app/assets/images/house.jpg"
-line.photo_url = url
+line.remote_photo_url = url
+line.save!
 
 line = Line.create(
   title: "Elon Musk's Interviewer Line",
@@ -135,7 +136,8 @@ line = Line.create(
 )
 line.save!
 url = "app/assets/images/elon.jpg"
-line.photo_url = url
+line.remote_photo_url = url
+line.save!
 
 line = Line.create(
   title: "Chase Bank Williamsburg's Customer Service Line",
@@ -147,8 +149,8 @@ line = Line.create(
 )
 line.save!
 url = "app/assets/images/bank.jpg"
-line.photo_url = url
-
+line.remote_photo_url = url
+line.save!
 
 puts 'Creating appointments...'
 

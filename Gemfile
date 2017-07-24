@@ -24,7 +24,7 @@ gem 'rails-assets-bootstrap-datetimepicker-3', source: 'https://rails-assets.org
 # Added
 gem 'omniauth-facebook'
 gem 'cloudinary', '1.1.7'
-gem 'attachinary', github: 'assembler/attachinary'
+gem 'carrierwave', '~> 0.11.2'
 gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
 gem 'geocoder'
