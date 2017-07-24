@@ -14,9 +14,6 @@ class Line < ApplicationRecord
   pg_search_scope :line_search, against: [ :title, :location, :organization_name ],
   using: {tsearch: {prefix: true, any_word: true}}
 
-  # ATTACHINARY CONFIG
-  # has_attachment :photo
-
   # GEOLOCATION CONFIG
   geocoded_by :location
   after_validation :geocode, if: :location_changed?
