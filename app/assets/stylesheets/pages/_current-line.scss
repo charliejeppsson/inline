@@ -1,3 +1,8 @@
+
+#current_line {
+  display: flex;
+  flex-direction: column;
+}
 .empty-line-wrapper {
   height: 400px;
   display: flex;
@@ -6,4 +11,80 @@
 }
 .empty-line-wrapper h2 {
   margin: 0;
+}
+.appointment-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  margin: 8px;
+}
+
+/* Body design */
+.appointment-list-body {
+  flex: 0 0 auto;
+}
+.appointment-list-body h4 {
+  text-align: left;
+}
+.appointment-list-body p {
+  font-weight: lighter;
+  color: #999999;
+  margin-bottom: 0;
+}
+
+// appointment-list avatar
+.appointment-list-avatar {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+/* Controls design */
+.appointment-list-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0px;
+}
+.appointment-list-controls a {
+  padding: 0 20px;
+  font-size: 17px;
+  color: #E6E6E6;
+}
+.appointment-list-controls-big a {
+  font-size: 30px;
+  color: #1A2930;
+}
+.appointment-list-controls a:hover {
+  color: #FDB631 !important
+}
+.appointment-list-controls-hidden a {
+  color: transparent;
+  font-size: 15px;
+  transition: all 0.15s ease;
+  border-color: transparent;
+}
+
+/* Hover effects */
+.appointment-list:hover {
+  background: #f7f7fa;
+  cursor: pointer;
+}
+.appointment-list-upvote:hover, .appointment-list-upvote.appointment-list-upvote-upvoted {
+  color: #5898f1;
+  cursor: pointer;
+}
+.appointment-list-upvote-upvoted .appointment-list-arrow {
+  border-bottom-color: #5898f1;
+}
+// .appointment-list:hover .appointment-list-upvote { transform: scale(1.2) }
+.appointment-list:hover .appointment-list-controls-hidden a { color: #E6E6E6 }
+.appointment-list-upvote:hover .appointment-list-arrow { border-bottom: 9px solid #5898f1 }
+
+.hidden-list {
+  text-align: center;
+  margin-top: 125px;
 }

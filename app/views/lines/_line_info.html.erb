@@ -1,69 +1,24 @@
 
-<!-- LINE INFORMATION, HIDDEN FROM START IF USER IS HOST -->
 <div class="tab-content hidden" id="line_info">
-  <h2 class="text-center">Line information</h2>
+  <h2 class="text-center" style="width: 100%; margin-bottom: 10px;">Line information</h2>
   <div class="line-info-wrapper">
-    <div class="container-fluid">
+    <% user = User.find(@line.user_id) %>
+    <% line_list = { %>
+      <% "Organization:": @line.organization_name, %>
+      <% "Host:": user.first_name + " " + user.last_name, %>
+      <% "Location:": @line.location, %>
+      <% "Starts:": @line.start_time.to_time.strftime('%B %e at %l:%M %p'), %>
+      <% "Ends:": @line.end_time.nil? ? "" : @line.end_time.to_time.strftime('%B %e at %l:%M %p'), %>
+      <% "Average service time:": "About " + @line.avg_service_time.to_s + " minutes" %>
+    <% } %>
 
-      <% unless @line.organization_name.nil? %>
-        <div class="row">
-          <div class="col-xs-6 col-md-3 col-md-offset-3">
-            <h4 class="text-left"> Organization: </h4>
-          </div>
-          <div class="col-xs-6 col-md-3">
-            <h4 class="text-right"> <%= @line.organization_name %> </h4>
-          </div>
-        </div>
+    <% line_list.each do |key, value| %>
+      <% unless value.nil? || value == "" %>
+        <ul class="line-info-list">
+          <li><h4 class="text-left"><%= key %></h4></li>
+          <li><h4 class="text-right"><%= value %></h4></li>
+        </ul>
       <% end %>
-
-      <% user = User.find(@line.user_id) %>
-      <div class="row">
-        <div class="col-xs-6 col-md-3 col-md-offset-3">
-          <h4 class="text-left"> Host: </h4>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <h4 class="text-right"> <%= user.first_name + " " + user.last_name %> </h4>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-6 col-md-3 col-md-offset-3">
-          <h4 class="text-left"> Location: </h4>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <h4 class="text-right"> <%= @line.location %> </h4>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-6 col-md-3 col-md-offset-3">
-          <h4 class="text-left"> Starts: </h4>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <h4 class="text-right"> <%= @line.start_time.to_time.strftime('%B %e at %l:%M %p') %> </h4>
-        </div>
-      </div>
-
-      <% unless @line.end_time.nil? %>
-        <div class="row">
-          <div class="col-xs-6 col-md-3 col-md-offset-3">
-            <h4 class="text-left"> Ends: </h4>
-          </div>
-          <div class="col-xs-6 col-md-3">
-            <h4 class="text-right"> <%= @line.end_time.to_time.strftime('%B %e at %l:%M %p') %> </h4>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="row">
-        <div class="col-xs-6 col-md-3 col-md-offset-3">
-          <h4 class="text-left"> Average service time: </h4>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <h4 class="text-right"> About <%= @line.avg_service_time %> minutes </h4>
-        </div>
-      </div>
-
-    </div>
+    <% end %>
   </div>
 </div>

@@ -1,6 +1,25 @@
+
 .line-info-wrapper {
   width: 100%;
-  height: 550px;
+  height: 500px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 100px;
+}
+.line-info-list {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+.line-info-list li {
+  width: 280px;
   word-wrap: break-word;
-  padding: 20px 0 0 0;
+  margin: 0;
+}
+.line-info-list li > h4 {
+  margin: 7px 0;
 }
