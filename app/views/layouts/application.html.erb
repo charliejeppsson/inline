@@ -9,11 +9,16 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body>
-    <!-- TO SHOW NAVBAR EVERYWHERE EXCEPT HOME PAGE -->
-    <% if content_for :full_page %>
+    <!-- TO HIDE NAVBAR FROM HOME PAGE -->
+    <% if content_for :home_page %>
       <%= render 'shared/flashes' %>
-      <%= yield :full_page %>
-      <%= render "shared/footer" %>
+      <%= yield :home_page %>
+      <%= render 'shared/footer' %>
+    <!-- TO DISPLAY TRANSPARENT NAVBAR AND FOOTER ON LINES#SHOW PAGE -->
+    <% elsif content_for :show_page %>
+      <%= render 'shared/flashes' %>
+      <%= yield :show_page %>
+    <!-- TO DISPLAY GREEN NAVBAR ON ON ALL OTHER PAGES -->
     <% elsif current_user.nil? %>
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
@@ -23,7 +28,7 @@
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
       <%= yield %>
-      <%= render "shared/footer" %>
+      <%= render 'shared/footer' %>
     <% end %>
 
     <!-- GOOGLE MAPS AND GEOCODING -->

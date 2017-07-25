@@ -1,219 +1,221 @@
 
 <!-- LIST OF SEARCH RESULTS -->
 <div class="line-list-wrapper">
-  <div class="container" style="padding: 0; align-items: center; margin-bottom: 180px;">
-    <div class="row">
-      <div class="col-xs-12 col-md-8">
-        <div class="line-list">
-          <ul class="list-unstyled">
 
-            <% @results.each do |line| %>
+  <div class="col-xs-12 col-md-8" style="padding-left: 0; padding-right: 10px">
+    <div class="line-list">
+      <ul class="list-unstyled">
 
-                <% if line.photo? %>
-                  <div class="line-li" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url('<%= cl_image_path line.photo, crop: :fill %>');">
-                <% else %>
-                  <div class="line-li" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url(<%= image_url('airport-line-3.png') %>);">
-                <% end %>
+        <% @results.each do |line| %>
 
-                    <li>
-                      <h3><%= link_to line.title %></h3>
-                      <div class="line-li-data">
-                        <table>
-                          <tr>
-                            <td class="text-center">
-                              <i class="fa fa-calendar" aria-hidden="true"></i>
-                            </td>
-                            <td>
-                              <p><%= line.organization_name %></p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">
-                              <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </td>
-                            <td>
-                              <p><%= line.location %></p>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                    </li>
-                    <li>
-                      <%#= render partial: 'time_left_avatar' %>
-                      <% people_in_front = line.appointments.count %>
-                      <% est_time_left = people_in_front * line.avg_service_time %>
-                      <div class="li-time">
-                        <% if est_time_left > 120 %>
-                          <div class="time-avatar two-plus-hours" title="Hours left">2h+</div>
-                        <% elsif est_time_left <= 135 && est_time_left > 105 %>
-                          <div class="time-avatar two-hours" title="Hours left">2h</div>
-                        <% elsif est_time_left <= 105 && est_time_left > 75 %>
-                          <div class="time-avatar one-five-hours" title="Hours left">1.5h</div>
-                        <% elsif est_time_left <= 75 && est_time_left > 45 %>
-                          <div class="time-avatar one-hour" title="Hours left">1h</div>
-                        <% else %>
-                          <div class="time-avatar half-hour" title="Hours left">0.5h</div>
-                        <% end %>
-                      </div>
-                    </li>
-                    <a href="<%= line_path(line) %>" class="line-list-link"></a>
+            <% if line.photo? %>
+              <div class="line-li" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url('<%= cl_image_path line.photo, crop: :fill %>');">
+            <% else %>
+              <div class="line-li" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url(<%= image_url('airport-line-3.png') %>);">
+            <% end %>
+
+                <li>
+                  <h3><%= link_to line.title %></h3>
+                  <div class="line-li-data">
+                    <table>
+                      <tr>
+                        <td class="text-center">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                          <p><%= line.organization_name %></p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center">
+                          <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                          <p><%= line.location %></p>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
+                </li>
+                <li>
+                  <% avatar_url = line.user.facebook_picture_url || "avatar-placeholder.png" %>
+                  <%= image_tag avatar_url, class: "avatar-large li-avatar" %>
+                </li>
+                <li>
+                  <!-- CIRCLE WITH ESTIMATED TIME LEFT OF LINE -->
+                  <% people_in_front = line.appointments.count %>
+                  <% est_time_left = people_in_front * line.avg_service_time %>
+                  <div class="li-time">
+                    <% if est_time_left > 120 %>
+                      <div class="time-avatar two-plus-hours" title="Hours left">2h+</div>
+                    <% elsif est_time_left <= 135 && est_time_left > 105 %>
+                      <div class="time-avatar two-hours" title="Hours left">2h</div>
+                    <% elsif est_time_left <= 105 && est_time_left > 75 %>
+                      <div class="time-avatar one-five-hours" title="Hours left">1.5h</div>
+                    <% elsif est_time_left <= 75 && est_time_left > 45 %>
+                      <div class="time-avatar one-hour" title="Hours left">1h</div>
+                    <% else %>
+                      <div class="time-avatar half-hour" title="Hours left">0.5h</div>
+                    <% end %>
+                  </div>
+                </li>
+                <a href="<%= line_path(line) %>" class="line-list-link"></a>
+              </div>
 
-            <% end %>
+        <% end %>
 
-          </ul>
-        </div>
-      </div>
-
-      <!-- MAP WITH GEOLOCATION RESULTS -->
-      <div class="col-xs-12 col-md-4">
-        <div id="map"></div>
-
-          <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-              $(document).ready(function() {
-                <!-- SNAZZYMAPS MAP STYLE -->
-                var styles = [ {
-                    "featureType": "administrative",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": "-100"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.province",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "landscape",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": -100
-                        },
-                        {
-                            "lightness": 65
-                        },
-                        {
-                            "visibility": "on"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": -100
-                        },
-                        {
-                            "lightness": "50"
-                        },
-                        {
-                            "visibility": "simplified"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": "-100"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "simplified"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.arterial",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "lightness": "30"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.local",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "lightness": "40"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": -100
-                        },
-                        {
-                            "visibility": "simplified"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                            "hue": "#ffff00"
-                        },
-                        {
-                            "lightness": -25
-                        },
-                        {
-                            "saturation": -97
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels",
-                    "stylers": [
-                        {
-                            "lightness": -25
-                        },
-                        {
-                            "saturation": -100
-                        }
-                    ]
-                }
-            ];
-                var handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map' }, provider:{ styles: styles, scrollwheel: false } }, function() {
-                  markers = handler.addMarkers(<%= raw @hash.to_json %>);
-                  handler.bounds.extendWith(markers);
-                  handler.fitMapToBounds();
-                  if (markers.length == 0) {
-                    handler.getMap().setZoom(2);
-                  } else if (markers.length == 1) {
-                    handler.getMap().setZoom(14);
-                  }
-                });
-              });
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-
+      </ul>
     </div>
   </div>
+
+  <!-- MAP WITH GEOLOCATION RESULTS -->
+  <div class="col-xs-12 col-md-4" style="padding-right: 0; padding-left: 10px">
+    <div id="map"></div>
+
+      <% content_for(:after_js) do %>
+        <%= javascript_tag do %>
+          $(document).ready(function() {
+            <!-- SNAZZYMAPS MAP STYLE -->
+            var styles = [ {
+                "featureType": "administrative",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": "-100"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.province",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": 65
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": "50"
+                    },
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": "-100"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "lightness": "30"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "lightness": "40"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "hue": "#ffff00"
+                    },
+                    {
+                        "lightness": -25
+                    },
+                    {
+                        "saturation": -97
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "lightness": -25
+                    },
+                    {
+                        "saturation": -100
+                    }
+                ]
+            }
+        ];
+            var handler = Gmaps.build('Google');
+            handler.buildMap({ internal: { id: 'map' }, provider:{ styles: styles, scrollwheel: false } }, function() {
+              markers = handler.addMarkers(<%= raw @hash.to_json %>);
+              handler.bounds.extendWith(markers);
+              handler.fitMapToBounds();
+              if (markers.length == 0) {
+                handler.getMap().setZoom(2);
+              } else if (markers.length == 1) {
+                handler.getMap().setZoom(14);
+              }
+            });
+          });
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+
 </div>

@@ -18,15 +18,15 @@ function initializeClock(id, endtime) {
     var t = getTimeRemaining(endtime);
 
     if (t.hours > 2.25) {
-      hoursSpan.innerHTML = "More than 2 hours left.";
+      hoursSpan.innerHTML = "More than 2 hours left";
     } else if (t.hours <= 2.25 && t.hours > 1.75) {
-      hoursSpan.innerHTML = "About 2 hours left.";
+      hoursSpan.innerHTML = "About 2 hours left";
     } else if (t.hours <= 1.75 && t.hours > 1.25) {
-      hoursSpan.innerHTML = "About 1,5 hours left.";
+      hoursSpan.innerHTML = "About 1,5 hours left";
     } else if (t.hours <= 1.25 && t.hours > 0.75) {
-      hoursSpan.innerHTML = "About 1 hour left.";
+      hoursSpan.innerHTML = "About 1 hour left";
     } else {
-      hoursSpan.innerHTML = "About 0,5 hours left.";
+      hoursSpan.innerHTML = "About 0,5 hours left";
     }
 
     if (t.total <= 0) {

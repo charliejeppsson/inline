@@ -1,13 +1,13 @@
-<div class="navbar-wagon">
+<div class="<%= current_page?(controller: 'lines', action: 'show') ? 'navbar-wagon-transparent' : 'navbar-wagon-green' %>">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "inline_logo_white.png", style: "width: 150px;" %>
+  <%= link_to root_path, class: "navbar-logo" do %>
+    <%= image_tag "inline_logo_white.png" %>
   <% end %>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
-    <!-- LINE SEARCH BAR -->
+    <!-- Line search bar -->
     <div class="search events">
       <%= form_tag('/lines', method: 'get',  class:'home-search' ) do  %>
         <%= text_field_tag :search_value, params[:search_value], placeholder: 'Find your line' , class: "home-search-input" %>

@@ -5,11 +5,15 @@
 <% else %>
   <div class="line-banner" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%), url(<%= image_url('airport-line-3.png') %>);">
 <% end %>
-  <h1><%= @line.title %></h1>
-  <!-- TICKING TIMER UNTIL EITHER LINE OVER OR USER'S TURN -->
-  <%= render partial: 'time_left' %>
-  <!-- GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON, DEPENDING ON USER -->
-  <%= render partial: 'line_buttons' %>
+  <!-- TRANSPARENT NAVBAR ON TOP OF BANNER IMAGE -->
+  <%= render partial: 'shared/navbar' %>
+  <div class="line-banner-content">
+    <h1><%= @line.title %></h1>
+    <!-- TICKING TIMER UNTIL EITHER LINE OVER OR USER'S TURN -->
+    <div> <%= render partial: 'time_left' %> </div>
+    <!-- GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON, DEPENDING ON USER -->
+    <div style="margin-top: 30px;"> <%= render partial: 'line_buttons' %> </div>
+  </div>
 
   <!-- TAB PANEL WITH LINKS TO SUB-PAGES -->
   <div class="tabs">

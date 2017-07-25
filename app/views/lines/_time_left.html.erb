@@ -1,19 +1,38 @@
 
-<!-- ESTIMATING TIME LEFT OF LINE, NO CONDITIONS: -->
-<div class="col-xs-12 col-md-4 col-md-offset-4">
+<!-- ESTIMATING TIME LEFT OF LINE -->
 
-  <!-- CALLING JS INITIALIZECLOCK METHOD AND PASSING THE DEADLINE TO IT  -->
-  <% content_for(:after_js) do %>
-    <%= javascript_tag do %>
-      $(document).ready(function() {
+<!-- CALLING JS INITIALIZECLOCK METHOD AND PASSING THE DEADLINE TO IT  -->
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
 
-        <!-- TURN LINE AND APPOINTMENTS INTO JSON STRINGS, SINCE JS CAN'T HANDLE RUBY OBJECTS -->
+      <!-- TURN LINE AND APPOINTMENTS INTO JSON STRINGS, SINCE JS CAN'T HANDLE RUBY OBJECTS -->
+      <% line = @line.to_json %>
+      <% line = JSON.parse(line) %>
+      <% appointments = @line.appointments.order("created_at ASC").to_json %>
+      <% appointments = JSON.parse(appointments) %>
+
+      <!-- IF THE LINE IS NOT EMPTY, CALCULATE END_TIME AND SEND TO JS METHODS -->
+      if (<%= appointments.count != 0 %>) {
+        <% people_in_front = people_in_front(appointments) %>
+        <% avg_service_time = line["avg_service_time"].to_i %>
+        <% est_time_left = people_in_front * avg_service_time * 60 %>
+        <% end_time = Time.now + est_time_left %>
+        var deadline = new Date(<%= end_time.to_f * 1000 %>);
+        initializeClock('clockdiv', deadline);
+
+      } else {
+        $("#empty-line").removeClass("hidden");
+      }
+
+      <!-- NOT DRY CODE, FIX!!  -->
+      <!-- IF A USER IS REMOVED, DROPS OUT OR JOINS THE LINE WE UPDATE THE TIMER -->
+      $(".line-update").on("click", function(e){
         <% line = @line.to_json %>
         <% line = JSON.parse(line) %>
         <% appointments = @line.appointments.order("created_at ASC").to_json %>
         <% appointments = JSON.parse(appointments) %>
 
-        <!-- IF THE LINE IS NOT EMPTY, CALCULATE END_TIME AND SEND TO JS METHODS -->
         if (<%= appointments.count != 0 %>) {
           <% people_in_front = people_in_front(appointments) %>
           <% avg_service_time = line["avg_service_time"].to_i %>
@@ -25,40 +44,20 @@
         } else {
           $("#empty-line").removeClass("hidden");
         }
-
-        <!-- NOT DRY CODE, FIX!!  -->
-        <!-- IF A USER IS REMOVED, DROPS OUT OR JOINS THE LINE WE UPDATE THE TIMER -->
-        $(".line-update").on("click", function(e){
-          <% line = @line.to_json %>
-          <% line = JSON.parse(line) %>
-          <% appointments = @line.appointments.order("created_at ASC").to_json %>
-          <% appointments = JSON.parse(appointments) %>
-
-          if (<%= appointments.count != 0 %>) {
-            <% people_in_front = people_in_front(appointments) %>
-            <% avg_service_time = line["avg_service_time"].to_i %>
-            <% est_time_left = people_in_front * avg_service_time * 60 %>
-            <% end_time = Time.now + est_time_left %>
-            var deadline = new Date(<%= end_time.to_f * 1000 %>);
-            initializeClock('clockdiv', deadline);
-
-          } else {
-            $("#empty-line").removeClass("hidden");
-          }
-        });
-
       });
-    <% end %>
+
+    });
   <% end %>
+<% end %>
 
-  <!-- CLOCK TIMER OUTPUT FOR JS INITIALIZECLOCK METHOD -->
-  <div id="clockdiv">
-    <h2 class="hours"></h2>
-  </div>
-
-  <div class="hidden" id="empty-line">
-    <h2>This line is currently empty.</h2>
-  </div>
-
+<!-- CLOCK TIMER OUTPUT FOR JS INITIALIZECLOCK METHOD -->
+<div id="clockdiv">
+  <h2 class="hours"></h2>
 </div>
+
+<div class="hidden" id="empty-line">
+  <h2>This line is currently empty.</h2>
+</div>
+
+
 
