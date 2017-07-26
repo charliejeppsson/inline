@@ -5,7 +5,7 @@
     </div>
     <h1>Never wait in line again</h1>
     <!-- LINE SEARCH BAR -->
-    <div class="search events">
+    <div>
       <%= form_tag('/lines', method: 'get',  class: 'home-search' ) do  %>
         <%= text_field_tag :search_value, params[:search_value], placeholder: 'Find your line' , class: "home-search-input" %>
         <%= submit_tag 'Search', class: 'btn my-btn home-search-btn' %>
