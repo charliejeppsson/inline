@@ -1,30 +1,32 @@
 
-#current_line {
-  display: flex;
-  flex-direction: column;
-}
-.empty-line-wrapper {
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.empty-line-wrapper h2 {
-  margin: 0;
-}
-.appointment-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
-  border-radius: 3px;
-  transition: all 0.15s ease;
-  margin: 8px;
+// Line header
+#current_line h2 {
+  width: 100%;
+  margin-bottom: 10px;
+  height: 34px;
 }
 
-/* Body design */
+// List design
+.appointment-list {
+  height: 250px;
+  overflow: scroll;
+  margin-top: 30px;
+}
+.appointment-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+// List items design
+.appointment-list-avatar {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
 .appointment-list-body {
-  flex: 0 0 auto;
+  width: 200px;
 }
 .appointment-list-body h4 {
   text-align: left;
@@ -35,14 +37,8 @@
   margin-bottom: 0;
 }
 
-// appointment-list avatar
-.appointment-list-avatar {
-  width: 40px;
-  border-radius: 50%;
-  margin-right: 30px;
-}
 
-/* Controls design */
+// Controls design
 .appointment-list-controls {
   display: flex;
   align-items: center;
@@ -66,25 +62,4 @@
   font-size: 15px;
   transition: all 0.15s ease;
   border-color: transparent;
-}
-
-/* Hover effects */
-.appointment-list:hover {
-  background: #f7f7fa;
-  cursor: pointer;
-}
-.appointment-list-upvote:hover, .appointment-list-upvote.appointment-list-upvote-upvoted {
-  color: #5898f1;
-  cursor: pointer;
-}
-.appointment-list-upvote-upvoted .appointment-list-arrow {
-  border-bottom-color: #5898f1;
-}
-// .appointment-list:hover .appointment-list-upvote { transform: scale(1.2) }
-.appointment-list:hover .appointment-list-controls-hidden a { color: #E6E6E6 }
-.appointment-list-upvote:hover .appointment-list-arrow { border-bottom: 9px solid #5898f1 }
-
-.hidden-list {
-  text-align: center;
-  margin-top: 125px;
 }

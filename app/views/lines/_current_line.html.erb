@@ -1,29 +1,43 @@
-<!-- VISUALIZING THE LINE, NO CONDITIONS -->
+<!-- Visualizing the current line -->
 <div class="tab-content hidden" id="current_line">
-  <h2 class="text-center">Current line</h2>
-  <% unless @current_line.empty? %>
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <% @current_line.each_with_index do |appointment, index| %>
-        <% position = index + 1 %>
-        <% user = User.find(appointment.user_id) %>
-        <div class="appointment-list">
-          <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
-          <%= image_tag avatar_url, class: "appointment-list-avatar" %>
-          <div class='appointment-list-body'>
-            <h4><%= position.to_s + ". " + appointment.user.first_name + " " + appointment.user.last_name %></h4>
-          </div>
-          <ul class="list-inline appointment-list-controls">
-            <!-- IF CURRENT USER IS THE HOST OR AN ADMIN, SHE CAN REMOVE A USER FROM THE LINE -->
-            <% if @user_is_host || @user_is_admin %>
-              <li><%= link_to "", appointment_path(appointment), method: :delete, class: "fa fa-check line-update", title: "Appointment done" %></li>
+
+  <div class="container" style="margin-right: 0; margin-left: 0; width: 100%;">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="text-center"><%= pluralize @current_line.count, "person", "people" %> waiting in line</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 col-md-offset-4">
+        <% unless @current_line.empty? %>
+          <div class="appointment-list">
+
+            <% @current_line.each_with_index do |appointment, index| %>
+              <% position = index + 1 %>
+              <% user = User.find(appointment.user_id) %>
+              <div class="appointment-list-row">
+                <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+                <div class="appointment-list-avatar">
+                  <%= image_tag avatar_url, class: "appointment-list-avatar" %>
+                </div>
+                <div class='appointment-list-body'>
+                  <h4><%= position.to_s + ". " + appointment.user.first_name + " " + appointment.user.last_name %></h4>
+                </div>
+                <ul class="list-inline appointment-list-controls">
+                  <!-- IF CURRENT USER IS THE HOST OR AN ADMIN, SHE CAN REMOVE A USER FROM THE LINE -->
+                  <% if @user_is_host || @user_is_admin %>
+                    <li><%= link_to "", appointment_path(appointment), method: :delete, class: "fa fa-check line-update", title: "Appointment done" %></li>
+                  <% end %>
+                </ul>
+              </div>
             <% end %>
-          </ul>
-        </div>
-      <% end %>
+
+          </div>
+        <% else %>
+          <h2>It's your lucky day - this line is currently empty!</h2>
+        <% end %>
+      </div>
     </div>
-  <% else %>
-    <div class="empty-line-wrapper">
-      <h2>It's your lucky day - this line is currently empty!</h2>
-    </div>
-  <% end %>
+  </div>
+
 </div>

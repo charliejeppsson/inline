@@ -1,5 +1,5 @@
 
-<div class="footer <%= current_page?(controller: 'lines', action: 'show') ? 'footer-gray' : 'footer-green' %>">
+<div class="footer <%= (params[:controller] == 'lines' && params[:action] == 'show') ? 'footer-gray' : 'footer-green' %>">
 
   <!-- List of links to related pages -->
   <ul class="page-list">
