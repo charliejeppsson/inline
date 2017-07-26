@@ -194,7 +194,7 @@ line = Line.create(
   organization_name: "Chase Bank",
   location: "110 S 8th St, Brooklyn, New York, USA",
   start_time: "2017-06-24 11:00:00",
-  avg_service_time: 15,
+  avg_service_time: 30,
   user_id: User.where(email: "branch@manager.com").first.id
 )
 line.save!

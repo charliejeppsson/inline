@@ -7,6 +7,7 @@
   color: $white;
   font-family: $header-font;
   padding: 0;
+  margin-bottom: 155px;
 }
 #map {
   border-radius: 4px;
@@ -50,7 +51,7 @@
   max-width: 70%;
 }
 .line-li h3 a{
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1.1px;
@@ -61,7 +62,6 @@
   top: 10px;
 }
 .line-li p {
-  font-size: 10;
   margin: 0 0 0 10px;
 }
 .line-li tr {
@@ -69,36 +69,17 @@
 }
 .li-avatar {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 20px;
+  top: 20px;
 }
 .li-time {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 20px;
+  bottom: 20px;
+}
+.li-time p {
   font-family: $base-font;
-  text-align: center;
-}
-.time-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  padding-top: 10px;
-}
-.two-plus-hours {
-  background-color: $red;
-}
-.two-hours {
-  background-color: $orange;
-}
-.one-five-hours {
-  background-color: $yellow;
-}
-.one-hour {
-  background-color: $blue;
-}
-.half-hour {
-  background-color: $green;
+  font-size: 15px;
 }
 .line-li-data {
   font-size: 15px;

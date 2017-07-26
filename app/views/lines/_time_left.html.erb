@@ -14,9 +14,7 @@
 
       <!-- IF THE LINE IS NOT EMPTY, CALCULATE END_TIME AND SEND TO JS METHODS -->
       if (<%= appointments.count != 0 %>) {
-        <% people_in_front = people_in_front(appointments) %>
-        <% avg_service_time = line["avg_service_time"].to_i %>
-        <% est_time_left = people_in_front * avg_service_time * 60 %>
+        <% est_time_left = est_time_left(@line) %>
         <% end_time = Time.now + est_time_left %>
         var deadline = new Date(<%= end_time.to_f * 1000 %>);
         initializeClock('clockdiv', deadline);
@@ -34,9 +32,7 @@
         <% appointments = JSON.parse(appointments) %>
 
         if (<%= appointments.count != 0 %>) {
-          <% people_in_front = people_in_front(appointments) %>
-          <% avg_service_time = line["avg_service_time"].to_i %>
-          <% est_time_left = people_in_front * avg_service_time * 60 %>
+          <% est_time_left = est_time_left(@line) %>
           <% end_time = Time.now + est_time_left %>
           var deadline = new Date(<%= end_time.to_f * 1000 %>);
           initializeClock('clockdiv', deadline);

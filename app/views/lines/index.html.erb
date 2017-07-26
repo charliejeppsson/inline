@@ -42,21 +42,9 @@
                   <%= image_tag avatar_url, class: "avatar-large li-avatar" %>
                 </li>
                 <li>
-                  <!-- CIRCLE WITH ESTIMATED TIME LEFT OF LINE -->
-                  <% people_in_front = line.appointments.count %>
-                  <% est_time_left = people_in_front * line.avg_service_time %>
+                  <!-- Circle showing the est time left of the line -->
                   <div class="li-time">
-                    <% if est_time_left > 120 %>
-                      <div class="time-avatar two-plus-hours" title="Hours left">2h+</div>
-                    <% elsif est_time_left <= 135 && est_time_left > 105 %>
-                      <div class="time-avatar two-hours" title="Hours left">2h</div>
-                    <% elsif est_time_left <= 105 && est_time_left > 75 %>
-                      <div class="time-avatar one-five-hours" title="Hours left">1.5h</div>
-                    <% elsif est_time_left <= 75 && est_time_left > 45 %>
-                      <div class="time-avatar one-hour" title="Hours left">1h</div>
-                    <% else %>
-                      <div class="time-avatar half-hour" title="Hours left">0.5h</div>
-                    <% end %>
+                    <p>About <%= est_time_left(line)%>h left</p>
                   </div>
                 </li>
                 <a href="<%= line_path(line) %>" class="line-list-link"></a>

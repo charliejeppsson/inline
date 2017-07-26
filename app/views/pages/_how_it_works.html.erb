@@ -1,37 +1,37 @@
 
-<div class="container how-it-works">
-  <div class="row">
-    <div class="col-xs-12">
-      <h1>How it works</h1>
+<div class="how-it-works-wrapper">
+
+  <div class="how-it-works-header">
+    <h1>How it works</h1>
+  </div>
+
+  <div class="container how-it-works-steps">
+    <div class="row how-it-works-steps-row">
+      <div class="col-xs-6 col-sm-3">
+        <i class="fa fa-search"></i>
+        <p>Find your line</p>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <i class="fa fa-check"></i>
+        <p>Get in line</p>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <i class="fa fa-bell"></i>
+        <p>Get notified</p>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <i class="fa fa-smile-o"></i>
+        <p>Enjoy your extra time</p>
+      </div>
     </div>
   </div>
+
+  <div class="get-started">
+    <%= link_to 'Get started', new_user_registration_path, class: "btn btn-lg my-btn" %>
+  </div>
+
 </div>
 
-<div class="container steps verticalize">
-  <div class="row steps-row">
-    <div class="col-xs-12 col-sm-3">
-      <i class="fa fa-search"></i>
-      <p>Find your line</p>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      <i class="fa fa-check"></i>
-      <p>Get in line</p>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      <i class="fa fa-bell"></i>
-      <p>Get notified</p>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      <i class="fa fa-smile-o"></i>
-      <p>Enjoy your extra time</p>
-    </div>
-  </div>
-</div>
 
-<div class="container how-it-works">
-  <div class="row">
-    <div class="col-xs-12">
-      <%= link_to 'Get started', new_user_registration_path, class: "btn btn-lg my-btn" %>
-    </div>
-  </div>
-</div>
+
+

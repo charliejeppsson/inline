@@ -7,78 +7,39 @@
   text-align: center;
   height: 100vh;
   width: 100%;
-  /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.banner-content-wrapper {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
 }
 .banner-logo {
-  width: 300px;
-  margin-top: 110px;
+  width: 500px;
 }
-.banner-middle {
-  // margin-top: 30px;
-}
-.banner-middle h1 {
+.banner-content-wrapper h1 {
   font-size: 50px;
   text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
-.banner-middle p {
-  font-size: 20px;
-  font-weight: lighter;
-  color: rgba(255, 255, 255, 0.7);
-}
-.banner-bottom {
-  margin-top: 120px;
-}
-.already-member {
+.banner-bottom a {
   text-decoration: none;
-  color: #D0CCD0;
+  color: $lightgray;
 }
-.already-member:hover {
+.banner-bottom a:hover {
   text-decoration: none;
-  color: white;
-}
-
-// HOW IT WORKS SECTION
-.how-it-works {
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.how-it-works h1 {
-  margin-top: 11px;
-}
-.steps {
-  font-family: $base-font;
-  text-align: center;
-  width: 100%;
-  height: 300px;
-  background-image: linear-gradient(-225deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 50%),
-  url('airport-line-5.png');
-  background-size: cover !important;
-  padding: auto;
-}
-.verticalize {
-  display: flex;
-  align-items: center;
-}
-.steps-row {
-  width: 100%;
-  margin-left: 5px;
-}
-.steps p {
-  font-size: 20px;
   color: $white;
-}
-.steps i {
-  font-size: 50px;
-  margin: 11px 0 20px 0;
-  color: #F2F2F2;
+  cursor: pointer;
 }
 
-
-/* HOME PAGE SEARCH FORM */
+// HOME PAGE SEARCH FORM
 .home-search {
   flex: 0 1 300px;
   display: flex;
@@ -107,4 +68,58 @@
 }
 .home-search-input:focus  {
   border: 1px solid #CCCCCC;
+}
+
+// HOW IT WORKS SECTION
+.how-it-works-wrapper {
+  color: $white;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  background-size: cover !important;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+}
+.how-it-works-header {
+  height: 33.3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how-it-works-header h1 {
+  font-size: 50px;
+  text-shadow: 0px 1px $darkgray;
+  color: $darkgray;
+}
+.how-it-works-steps {
+  font-family: $base-font;
+  text-align: center;
+  width: 100%;
+  height: 33.3%;
+  background-image: linear-gradient(-225deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 50%),
+  url('airport-line-5.png');
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+}
+.how-it-works-steps-row {
+  width: 100%;
+}
+.how-it-works-steps p {
+  font-size: 20px;
+  color: $white;
+}
+.how-it-works-steps i {
+  font-size: 50px;
+  margin: 11px 0 20px 0;
+  color: $white;
+}
+.get-started {
+  height: 33.3%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
