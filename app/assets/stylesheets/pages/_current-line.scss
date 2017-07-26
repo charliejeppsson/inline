@@ -18,6 +18,9 @@
   justify-content: center;
   margin: 5px 0;
 }
+.appointment-list-row:hover {
+  background: white;
+}
 
 // List items design
 .appointment-list-avatar {
@@ -48,18 +51,9 @@
 .appointment-list-controls a {
   padding: 0 20px;
   font-size: 17px;
-  color: #E6E6E6;
-}
-.appointment-list-controls-big a {
-  font-size: 30px;
-  color: #1A2930;
+  color: $lightgray;
 }
 .appointment-list-controls a:hover {
-  color: #FDB631 !important
-}
-.appointment-list-controls-hidden a {
-  color: transparent;
-  font-size: 15px;
-  transition: all 0.15s ease;
-  border-color: transparent;
+  color: $orange !important;
+  text-decoration: none;
 }

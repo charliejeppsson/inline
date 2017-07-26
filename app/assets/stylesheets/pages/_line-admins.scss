@@ -1,6 +1,4 @@
 .admin-wrapper {
-  width: 100%;
-  height: 100%;
   padding: 0 40px;
 }
 
@@ -8,7 +6,7 @@
 .user-search {
   flex: 0 1 100%;
   display: flex;
-  padding: 0 10px;
+  padding: 0;
   position: relative;
 }
 .user-search-btn {
@@ -37,13 +35,20 @@
 
 // LIST OF CURRENT LINE ADMINS
 .admin-list {
+  height: 260px;
+  overflow: scroll;
+}
+.admin-list-item {
   display: flex;
   align-items: center;
   padding: 0 5px;
   border-radius: 3px;
   transition: all 0.15s ease;
   width: 100%;
-  margin: 8px;
+  margin: 8px 0 8px 0;
+}
+.admin-list-item:hover {
+  background-color: white;
 }
 
  // Body design
@@ -74,40 +79,15 @@
   margin: 0px;
 }
 .admin-list-controls a {
-  padding: 0 20px;
+  padding: 0 6px;
   font-size: 17px;
-  color: #E6E6E6;
-}
-.admin-list-controls-big a {
-  font-size: 30px;
-  color: #1A2930;
+  color: $lightgray;
 }
 .admin-list-controls a:hover {
   color: $orange !important;
   text-decoration: none;
-}
-.admin-list-controls-hidden a {
-  color: transparent;
-  font-size: 15px;
-  transition: all 0.15s ease;
-  border-color: transparent;
-}
-
-// Hover effects
-.admin-list:hover {
-  background: white;
   cursor: pointer;
 }
-.admin-list-upvote:hover, .admin-list-upvote.admin-list-upvote-upvoted {
-  color: #5898f1;
-  cursor: pointer;
-}
-.admin-list-upvote-upvoted .admin-list-arrow {
-  border-bottom-color: #5898f1;
-}
-// .admin-list:hover .admin-list-upvote { transform: scale(1.2) }
-.admin-list:hover .admin-list-controls-hidden a { color: #E6E6E6 }
-.admin-list-upvote:hover .admin-list-arrow { border-bottom: 9px solid #5898f1 }
 
 .hidden-list {
   text-align: center;

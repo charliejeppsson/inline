@@ -1,13 +1,17 @@
 
 <!-- LISTING THE ADMINS, NO CONDITIONS -->
 <div class="tab-content <%= current_user.id != @line.user.id ? "hidden" : "" %>" id="line_admins">
-  <div class="col-xs-12 col-md-6">
-    <div class="admin-wrapper">
-      <h2>Current admins</h2>
-      <% unless @admins.empty? %>
+  <div class="col-xs-12 col-md-6 admin-wrapper">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2><%= pluralize @admins.count, "current line admin" %></h2>
+      </div>
+    </div>
+    <% unless @admins.empty? %>
+      <div class="admin-list">
         <% @admins.each_with_index do |admin, index| %>
           <% user = User.find(admin.user_id) %>
-          <div class="admin-list">
+          <div class="admin-list-item">
             <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
             <%= image_tag avatar_url, class: "admin-list-avatar" %>
             <div class='admin-list-body'>
@@ -21,49 +25,45 @@
             </ul>
           </div>
         <% end %>
-      <% else %>
-        <h4>You have not added any admins to this line yet.</h4>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+      <h4>You have not added any admins to this line yet.</h4>
+    <% end %>
   </div>
 
   <!-- USER SEARCH BAR FOR ADDING ADMINS, ONLY VISIBLE TO EVENT'S HOST -->
-  <div class="col-xs-12 col-md-6">
-    <div class="admin-wrapper">
-      <h2>Add admins</h2>
-      <%= form_tag(line_path(@line.id), method: 'get',  class: 'user-search' ) do  %>
-        <%= text_field_tag :search_value, params[:search_value], placeholder: 'Search users' , class: "user-search-input" %>
-        <button type="submit" class="navbar-wagon-search-btn search-click" data-target="#line_admins_list">
-          <i class="fa fa-search"></i>
-        </button>
-      <% end %>
+  <div class="col-xs-12 col-md-6 admin-wrapper">
+    <h2>Add admins</h2>
+    <%= form_tag(line_path(@line.id), method: 'get',  class: 'user-search' ) do  %>
+      <%= text_field_tag :search_value, params[:search_value], placeholder: 'Search users' , class: "user-search-input" %>
+      <button type="submit" class="navbar-wagon-search-btn search-click" data-target="#line_admins_list">
+        <i class="fa fa-search"></i>
+      </button>
+    <% end %>
 
-      <!-- USER SEARCH RESULTS FOR ADDING ADMINS, ONLY VISIBLE TO LINE'S HOST -->
-      <div id="line_admins_list">
-        <div class="line-list">
-          <ul class="list-unstyled">
-            <% if params[:search_value] != nil && params[:search_value] != "" %>
-
-              <% @results.each do |user| %>
-                <div class="admin-list">
-                  <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
-                  <%= image_tag avatar_url, class: "admin-list-avatar" %>
-                  <div class='admin-list-body'>
-                    <h4><%= user.first_name + " " + user.last_name %></h4>
-                  </div>
-                  <ul class="list-inline admin-list-controls">
-                    <!-- THE LINE HOST CAN MAKE A USER FROM THE SEARCH RESULTS LIST AN ADMIN -->
-                    <% @user_id = user.id %>
-                    <% @line_id = @line.id %>
-                    <li><%= link_to "", line_make_admin_path(@line_id, @user_id), method: :get, class: "fa fa-user-plus", title: "Make admin" %></li>
-                  </ul>
-                </div>
-              <% end %>
-            <% end %>
-          </ul>
+    <!-- USER SEARCH RESULTS FOR ADDING ADMINS, ONLY VISIBLE TO LINE'S HOST -->
+    <div id="line_admins_list">
+      <% if params[:search_value] != nil && params[:search_value] != "" %>
+        <div class="admin-list">
+          <% @results.each do |user| %>
+            <div class="admin-list-item">
+              <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+              <%= image_tag avatar_url, class: "admin-list-avatar" %>
+              <div class='admin-list-body'>
+                <h4><%= user.first_name + " " + user.last_name %></h4>
+              </div>
+              <ul class="list-inline admin-list-controls">
+                <!-- THE LINE HOST CAN MAKE A USER FROM THE SEARCH RESULTS LIST AN ADMIN -->
+                <% @user_id = user.id %>
+                <% @line_id = @line.id %>
+                <li><%= link_to "", line_make_admin_path(@line_id, @user_id), method: :get, class: "fa fa-user-plus", title: "Make admin" %></li>
+              </ul>
+            </div>
+          <% end %>
         </div>
-      </div>
+      <% end %>
     </div>
+
   </div>
 </div>
 

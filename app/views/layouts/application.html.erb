@@ -13,10 +13,12 @@
     <% if content_for :home_page %>
       <%= render 'shared/flashes' %>
       <%= yield :home_page %>
+      <%= render 'shared/footer' %>
     <!-- TO DISPLAY TRANSPARENT NAVBAR AND FOOTER ON LINES#SHOW PAGE -->
     <% elsif content_for :show_page %>
       <%= render 'shared/flashes' %>
       <%= yield :show_page %>
+      <%= render 'shared/footer' %>
     <!-- TO DISPLAY GREEN NAVBAR ON ON ALL OTHER PAGES -->
     <% else %>
       <%= render 'shared/navbar' %>
