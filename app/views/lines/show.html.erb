@@ -1,11 +1,13 @@
-<!-- USING CONTENT_FOR HELPER TO ONLY SHOW THE TRANSPARENT NAVBAR IN LINES#SHOW PAGE -->
+
+<!-- Using content_for helper to only display the transparent navbar in lins#show view -->
 <% content_for :show_page do %>
   <%= render partial: 'line_banner' %>
 
-  <!-- TAB CONTENT RENDERING FROM PARTIALS -->
+  <!-- Tab content rendering from partials -->
   <%= render partial: 'line_info' %>
   <%= render partial: 'current_line' %>
   <%= render partial: 'line_admins' %>
   <%= render partial: 'line_settings' %>
   <%= render partial: 'line_directions' %>
+  <%= render partial: 'contact_admins' %>
 <% end %>

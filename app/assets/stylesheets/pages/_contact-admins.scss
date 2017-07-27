@@ -1,48 +1,44 @@
-
-// Line wrapper and header
-.current-line-wrapper {
+// Admins list wrapper and header
+.contact-admins-wrapper {
   margin-right: 0;
   margin-left: 0;
   width: 100%;
 }
-#current_line h2 {
+#contact_admins h2 {
   width: 100%;
   margin-bottom: 10px;
   height: 40px;
 }
-.line-empty {
-  text-align: center;
-}
 
 // List design
-.appointment-list {
+.admin-list {
   height: 250px;
   overflow: scroll;
   margin-top: 30px;
 }
-.appointment-list-row {
+.admin-list-row {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 5px 0;
 }
-.appointment-list-row:hover {
+.admin-list-row:hover {
   background: white;
 }
 
 // List items design
-.appointment-list-avatar {
+.admin-list-avatar {
   width: 40px;
   border-radius: 50%;
   margin-right: 30px;
 }
-.appointment-list-body {
+.admin-list-body {
   width: 200px;
 }
-.appointment-list-body h4 {
+.admin-list-body h4 {
   text-align: left;
 }
-.appointment-list-body p {
+.admin-list-body p {
   font-weight: lighter;
   color: #999999;
   margin-bottom: 0;
@@ -50,18 +46,18 @@
 
 
 // Controls design
-.appointment-list-controls {
+.admin-list-controls {
   display: flex;
   align-items: center;
   text-align: center;
   margin: 0px;
 }
-.appointment-list-controls a {
+.admin-list-controls a {
   padding: 0 20px;
   font-size: 17px;
   color: $lightgray;
 }
-.appointment-list-controls a:hover {
+.admin-list-controls a:hover {
   color: $orange !important;
   text-decoration: none;
 }

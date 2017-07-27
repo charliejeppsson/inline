@@ -7,7 +7,7 @@
       <% "Organization:": @line.organization_name, %>
       <% "Host:": user.first_name + " " + user.last_name, %>
       <% "Location:": @line.location, %>
-      <% "Starts:": @line.start_time.to_time.strftime('%B %e at %l:%M %p'), %>
+      <% "Starts:": @line.start_time.nil? ? "" : @line.start_time.to_time.strftime('%B %e at %l:%M %p'), %>
       <% "Ends:": @line.end_time.nil? ? "" : @line.end_time.to_time.strftime('%B %e at %l:%M %p'), %>
       <% "Average service time:": "About " + @line.avg_service_time.to_s + " minutes" %>
     <% } %>

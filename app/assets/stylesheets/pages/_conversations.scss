@@ -1,4 +1,16 @@
 
+.inbox-wrapper {
+  height: calc(100vh - 90px - 150px);
+  display: flex;
+  align-items: center;
+}
+.inbox-row {
+  width: 100%;
+}
+.inbox-col {
+  height: 100%;
+}
+
 .panel-heading {
   background-color: $darkgray;
 }
@@ -7,6 +19,70 @@
   font-family: $header-font;
   font-size: 16px;
 }
+
+// CURRENT CHAT PARTNERS LIST DESIGN
+.chat-list {
+  height: 100%;
+  overflow: scroll;
+  padding: 15px;
+}
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  width: 100%;
+  margin: 8px 0 8px 0;
+}
+.chat-list-item:hover {
+  background-color: white;
+}
+
+ // Body design
+.chat-list-body {
+  flex: 1 1 auto;
+}
+.chat-list-body h4 {
+  text-align: left;
+}
+.chat-list-body p {
+  font-weight: lighter;
+  color: #999999;
+  margin-bottom: 0;
+}
+
+// chat-list avatar
+.chat-list-avatar {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+// Controls design
+.chat-list-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0px;
+}
+.chat-list-controls a {
+  padding: 0 6px;
+  font-size: 17px;
+  color: $lightgray;
+}
+.chat-list-controls a:hover {
+  color: $orange !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hidden-list {
+  text-align: center;
+  margin-top: 125px;
+}
+
+
 .toggle-window {
   text-decoration: none !important;
   color: $white !important;
@@ -27,6 +103,11 @@
 }
 .panel-body {
   background-color: #E0E0E0;
+  height: 220px;
+  padding: 15px;
+}
+.potential-chat-partners {
+
 }
 .btn-cross {
   background-color: transparent;

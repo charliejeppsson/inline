@@ -3,7 +3,7 @@ class Line < ApplicationRecord
   has_many :administrators, dependent: :destroy
   belongs_to :user
 
-  validates :title, :location, :start_time, :avg_service_time, presence: true
+  validates :title, :location, :avg_service_time, presence: true
   validates :avg_service_time, numericality: { only_integer: true }
 
   # CARRIERWAVE CONFIG

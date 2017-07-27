@@ -30,7 +30,6 @@
 // For datetimepicker animation in lines#create and lines#edit
 $(document).ready(function() {
   $('#datetimepicker1').datetimepicker();
-
   $('#datetimepicker2').datetimepicker();
 
   $('#datetimepicker1').on('dp.change', function (e) {

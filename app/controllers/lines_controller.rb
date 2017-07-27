@@ -91,7 +91,7 @@ class LinesController < ApplicationController
     end_t = params[:line][:end_time]
 
     if start_t != '' && end_t != ''
-      start_p =  DateTime.strptime(start_t, '%m/%d/%Y %H:%M %p')
+      start_p = DateTime.strptime(start_t, '%m/%d/%Y %H:%M %p')
       end_p = DateTime.strptime(end_t, '%m/%d/%Y %H:%M %p')
     end
 
@@ -125,11 +125,13 @@ class LinesController < ApplicationController
     @line.save!
 
     redirect_to line_path(@line)
+    flash[:notice] = "Your line information has been edited."
   end
 
   def destroy
     @line.destroy
     redirect_to lines_path
+    flash[:notice] = "Your line has been removed."
   end
 
   def get_in_line

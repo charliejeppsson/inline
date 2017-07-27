@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # CHAT FEATURE
   get 'home/index'
+
   resources :conversations, only: [:create] do
     member do
       post :close
