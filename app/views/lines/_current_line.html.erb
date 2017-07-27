@@ -1,7 +1,7 @@
 <!-- Visualizing the current line -->
 <div class="tab-content hidden" id="current_line">
 
-  <div class="container" style="margin-right: 0; margin-left: 0; width: 100%;">
+  <div class="container current-line-wrapper">
     <div class="row">
       <div class="col-xs-12">
         <h2 class="text-center"><%= pluralize @current_line.count, "person", "people" %> waiting in line</h2>
@@ -34,7 +34,7 @@
 
           </div>
         <% else %>
-          <h2>It's your lucky day - this line is currently empty!</h2>
+          <h2 class="line-empty">It's your lucky day - this line is currently empty!</h2>
         <% end %>
       </div>
     </div>

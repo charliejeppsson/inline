@@ -1,21 +1,25 @@
 
-<!-- BANNER WITH UPLOADED PHOTO-->
+<!-- Banner with uploaded line photo -->
 <% if @line.photo? %>
   <div class="line-banner" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%), url('<%= cl_image_path @line.photo, crop: :fill %>');">
 <% else %>
   <div class="line-banner" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%), url(<%= image_url('airport-line-3.png') %>);">
 <% end %>
-  <!-- TRANSPARENT NAVBAR ON TOP OF BANNER IMAGE -->
+  <!-- Transparent navbar on top of banner background image -->
   <%= render partial: 'shared/navbar' %>
   <div class="line-banner-content">
     <h1><%= @line.title %></h1>
-    <!-- TICKING TIMER UNTIL EITHER LINE OVER OR USER'S TURN -->
-    <div> <%= render partial: 'time_left' %> </div>
-    <!-- GET-IN-LINE OR DROP-OUT-OF-LINE BUTTON, DEPENDING ON USER -->
+    <!-- Estimated time left of line -->
+    <% unless @line.appointments.empty? %>
+      <h2>About <%= est_time_left(@line)%>h left</h2>
+    <% else %>
+      <h2>This line is currently empty.</h2>
+    <% end %>
+    <!-- "Get in line" or "drop out of line" button, depending on current user -->
     <div style="margin-top: 30px;"> <%= render partial: 'line_buttons' %> </div>
   </div>
 
-  <!-- TAB PANEL WITH LINKS TO SUB-PAGES -->
+  <!-- Tab panel with links to sub pages -->
   <div class="tabs">
     <% if @user_is_host %>
       <a class="tab active" data-target="#line_admins">Line admins</a>

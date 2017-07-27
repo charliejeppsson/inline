@@ -5,7 +5,7 @@
       <h2 class="text-center">Edit your line</h2>
     </div>
     <div class="row">
-      <div class='col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 line-settings-wrapper'>
+      <div class='col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 line-settings-wrapper'>
         <div class="line-settings-form">
           <%= simple_form_for @line do |f| %>
             <%= f.error_notification %>
@@ -13,8 +13,8 @@
             <div class="form-inputs line-form">
               <%= f.input :title, required: true, autofocus: true %>
               <%= f.input :location, required: true, autofocus: true %>
-              <%= f.input :start_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker1"} %>
-              <%= f.input :end_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker2"} %>
+              <%= f.input :start_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker1", value: @line.start_time.to_time.strftime("%m/%d/%Y %H:%M %p") } %>
+              <%= f.input :end_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker2", value: @line.end_time.to_time.strftime("%m/%d/%Y %H:%M %p") } %>
               <%= f.input :avg_service_time, required: true, autofocus: true %>
               <%= f.input :organization_name, required: false, autofocus: true %>
               <%= f.input :photo %>

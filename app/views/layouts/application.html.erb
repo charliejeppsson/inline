@@ -9,17 +9,17 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body>
-    <!-- TO HIDE NAVBAR FROM HOME PAGE -->
+    <!-- To hide navbar from home page -->
     <% if content_for :home_page %>
       <%= render 'shared/flashes' %>
       <%= yield :home_page %>
       <%= render 'shared/footer' %>
-    <!-- TO DISPLAY TRANSPARENT NAVBAR AND FOOTER ON LINES#SHOW PAGE -->
+    <!-- To displat transparent navbar on lines#show view -->
     <% elsif content_for :show_page %>
       <%= render 'shared/flashes' %>
       <%= yield :show_page %>
       <%= render 'shared/footer' %>
-    <!-- TO DISPLAY GREEN NAVBAR ON ON ALL OTHER PAGES -->
+    <!-- To display green navbar on all other views -->
     <% else %>
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
@@ -27,7 +27,7 @@
       <%= render 'shared/footer' %>
     <% end %>
 
-    <!-- GOOGLE MAPS AND GEOCODING -->
+    <!-- Google maps and geocoding -->
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
     <%#= javascript_include_tag "https://maps.google.com/maps/api/js" %>
     <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
@@ -35,7 +35,7 @@
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
 
-    <!-- FOR IMAGE UPLOADING TO CLOUDINARY -->
+    <!-- For image uploading with cloudinary -->
     <%= cloudinary_js_config %>
   </body>
 </html>

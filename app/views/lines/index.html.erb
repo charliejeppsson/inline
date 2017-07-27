@@ -1,19 +1,17 @@
 
-<!-- LIST OF SEARCH RESULTS -->
+<!-- List of search results -->
+<h2 class="text-center"><%= pluralize @results.count, "result" %> found:</h2>
 <div class="line-list-wrapper">
-
   <div class="col-xs-12 col-md-8" style="padding-left: 0; padding-right: 10px">
     <div class="line-list">
       <ul class="list-unstyled">
 
         <% @results.each do |line| %>
-
             <% if line.photo? %>
               <div class="line-li" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url('<%= cl_image_path line.photo, crop: :fill %>');">
             <% else %>
               <div class="line-li" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url(<%= image_url('airport-line-3.png') %>);">
             <% end %>
-
                 <li>
                   <h3><%= link_to line.title %></h3>
                   <div class="line-li-data">
@@ -56,14 +54,14 @@
     </div>
   </div>
 
-  <!-- MAP WITH GEOLOCATION RESULTS -->
+  <!-- Map with geolocation results styled with Snazzymaps -->
   <div class="col-xs-12 col-md-4" style="padding-right: 0; padding-left: 10px">
     <div id="map"></div>
 
       <% content_for(:after_js) do %>
         <%= javascript_tag do %>
           $(document).ready(function() {
-            <!-- SNAZZYMAPS MAP STYLE -->
+            <!-- Snazzymaps map style -->
             var styles = [ {
                 "featureType": "administrative",
                 "elementType": "all",

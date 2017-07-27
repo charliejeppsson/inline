@@ -1,9 +1,17 @@
 
-// Line header
+// Line wrapper and header
+.current-line-wrapper {
+  margin-right: 0;
+  margin-left: 0;
+  width: 100%;
+}
 #current_line h2 {
   width: 100%;
   margin-bottom: 10px;
-  height: 34px;
+  height: 80px;
+}
+.line-empty {
+  text-align: center;
 }
 
 // List design

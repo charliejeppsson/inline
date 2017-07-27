@@ -1,13 +1,12 @@
 
 // LINE SEARCH RESULTS LIST
 .line-list-wrapper {
-  height: 660px;
+  height: calc(100vh - 90px - 150px);
   display: flex;
   align-items: center;
   color: $white;
   font-family: $header-font;
   padding: 0;
-  margin-bottom: 155px;
 }
 #map {
   border-radius: 4px;
@@ -20,7 +19,6 @@
   overflow: scroll;
 }
 .line-li {
-  // style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%), url('<%= cl_image_path line.photo.path, crop: :fill %>');"
   background-size: cover;
   background-position: center;
   padding: 7px 15px 7px 15px;

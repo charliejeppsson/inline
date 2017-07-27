@@ -10,6 +10,7 @@
 //= require_tree ./channels
 //= require_tree .
 
+// For opening and closing chat conversation windows
 (function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();
@@ -26,8 +27,10 @@
   });
 })();
 
+// For datetimepicker animation in lines#create and lines#edit
 $(document).ready(function() {
   $('#datetimepicker1').datetimepicker();
+
   $('#datetimepicker2').datetimepicker();
 
   $('#datetimepicker1').on('dp.change', function (e) {
