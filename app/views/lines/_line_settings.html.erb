@@ -7,6 +7,7 @@
     <div class="row">
       <div class='col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 line-settings-wrapper'>
         <div class="line-settings-form">
+          <% @line.end_time.nil? ? end_time = "" : @line.end_time.to_time.strftime("%m/%d/%Y %H:%M %p") %>
           <%= simple_form_for @line do |f| %>
             <%= f.error_notification %>
 
@@ -14,7 +15,7 @@
               <%= f.input :title, required: true, autofocus: true %>
               <%= f.input :location, required: true, autofocus: true %>
               <%= f.input :start_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker1", value: @line.start_time.to_time.strftime("%m/%d/%Y %H:%M %p") } %>
-              <%= f.input :end_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker2", value: @line.end_time.to_time.strftime("%m/%d/%Y %H:%M %p") } %>
+              <%= f.input :end_time, as: :string, required: true, autofocus: true, input_html: {id: "datetimepicker2", value: end_time } %>
               <%= f.input :avg_service_time, required: true, autofocus: true %>
               <%= f.input :organization_name, required: false, autofocus: true %>
               <%= f.input :photo %>

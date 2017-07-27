@@ -1,4 +1,4 @@
-<div class="container" style="margin-bottom: 180px;">
+<div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
 
@@ -14,9 +14,9 @@
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
 
-          <%= f.input :password, autocomplete: "off", hint: "Leave blank if you don't want to change it", required: false %>
+          <%= f.input :password, autocomplete: "off", required: false %>
           <%= f.input :password_confirmation, required: false %>
-          <%= f.input :current_password, hint: "Enter your current password to confirm the changes", required: true %>
+          <%= f.input :current_password, required: true %>
         </div>
 
         <div class="form-actions">
