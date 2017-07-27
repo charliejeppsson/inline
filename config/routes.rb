@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'conversations/create'
 
-  # CHAT FEATURE
+  # Action cable chat feature
   get 'home/index'
 
   resources :conversations, only: [:create] do
@@ -17,13 +17,13 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable' # Serve web socket cable requests in process
 
-  # ADMINISTRATORS:
+  # Administrators
   resources :administrators, only: [:new, :create, :destroy]
 
-  # APPOINTMENTS:
+  # Appointments
   resources :appointments
 
-  # LINES:
+  # Lines
   resources :lines do
     get 'get_in_line', to: "lines#get_in_line"
   end
@@ -31,12 +31,14 @@ Rails.application.routes.draw do
   get 'lines(/:line_id)(/make_admin/:user_id)', controller: 'lines', action: 'make_admin', as: 'line_make_admin'
 
 
-  # USERS:
+  # Users
   get 'users/show'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  # To a) customize user registrations and account updates so that first and last names are also included
+  # and b) allow for facebook API registrations
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  # PAGES:
+  # Pages
   root to: 'pages#home'
 
 end
