@@ -11,8 +11,12 @@
       <div class="col-xs-12 col-md-4 col-md-offset-4">
         <% unless @admins.empty? %>
           <div class="admin-list">
-            <% @admins.each_with_index do |admin| %>
-              <% user = User.find(admin.user_id) %>
+            <% admins_and_hosts = [] %>
+            <% admins_and_hosts << @line.user %>
+            <% @admins.each do |admin| %>
+              <% admins_and_hosts << User.find(admin.user_id) %>
+            <% end %>
+            <% admins_and_hosts.each do |user| %>
               <div class="admin-list-row">
                 <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
                 <div class="admin-list-avatar">

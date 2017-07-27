@@ -35,13 +35,15 @@ $(document).on('submit', '.new_message', function(e) {
 });
 
 // ALLOWING MESSAGE SUBMISSION WHEN CLICKING ENTER IN THE TEXT AREA
-$(function() {
-    $(".text-area").keypress(function (e) {
-        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-            $('.send-message').click();
-            return false;
-        } else {
-            return true;
-        }
-    });
-});
+// BUG: CODE CURRENTLY CAUSING ENTER CLICK TO POST EMPTY MESSAGE IN
+// EACH OPEN CONVERSATION
+// $(function() {
+//     $(".text-area").keypress(function (e) {
+//         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+//             $('.send-message').click();
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     });
+// });

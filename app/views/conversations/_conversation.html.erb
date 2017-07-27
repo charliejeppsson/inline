@@ -7,7 +7,7 @@
       <%= link_to "X", close_conversation_path(conversation), class: "btn btn-xs pull-right btn-cross", remote: true, method: :post %>
     </div>
 
-    <div class="panel-body" style="display: none;">
+    <div class="panel-body panel-body-messages" style="display: none;">
       <div class="messages-list">
         <ul>
           <%= render 'conversations/conversation_content', messages: conversation.messages.order("created_at ASC"), user: user %>
