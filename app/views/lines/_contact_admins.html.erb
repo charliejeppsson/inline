@@ -4,38 +4,37 @@
   <div class="container contact-admins-wrapper">
     <div class="row">
       <div class="col-xs-12">
-        <h2 class="text-center"><%= pluralize (@admins.count + 1), "admin", "admins" %> are helping people in this line</h2>
+        <h2 class="text-center"><%= pluralize (@admins.count + 1), "admin is", "admins are" %> helping people in this line</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-4 col-md-offset-4">
-        <% unless @admins.empty? %>
-          <div class="admin-list">
-            <% admins_and_hosts = [] %>
-            <% admins_and_hosts << @line.user %>
+        <div class="admin-list">
+          <% admins_and_hosts = [] %>
+          <% admins_and_hosts << @line.user %>
+          <% unless @admins.empty? %>
             <% @admins.each do |admin| %>
               <% admins_and_hosts << User.find(admin.user_id) %>
             <% end %>
-            <% admins_and_hosts.each do |user| %>
-              <div class="admin-list-row">
-                <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
-                <div class="admin-list-avatar">
-                  <%= image_tag avatar_url, class: "admin-list-avatar" %>
-                </div>
-                <div class='admin-list-body'>
-                  <h4><%= user.first_name + " " + user.last_name %></h4>
-                </div>
-                <ul class="list-inline admin-list-controls">
-                  <!-- The user can click a message button to be redirected to the chat view, where a list of the user's current hosts and admins is displayed -->
-                  <li>
-                    <%= link_to "", home_index_path, class: "fa fa-envelope-o", title: "Message admin" %>
-                  </li>
-                </ul>
+          <% end %>
+          <% admins_and_hosts.each do |user| %>
+            <div class="admin-list-row">
+              <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
+              <div class="admin-list-avatar">
+                <%= image_tag avatar_url, class: "admin-list-avatar" %>
               </div>
-            <% end %>
-
-          </div>
-        <% end %>
+              <div class='admin-list-body'>
+                <h4><%= user.first_name + " " + user.last_name %></h4>
+              </div>
+              <ul class="list-inline admin-list-controls">
+                <!-- The user can click a message button to be redirected to the chat view, where a list of the user's current hosts and admins is displayed -->
+                <li>
+                  <%= link_to "", home_index_path, class: "fa fa-envelope-o", title: "Message admin" %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
