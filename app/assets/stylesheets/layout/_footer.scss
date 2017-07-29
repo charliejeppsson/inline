@@ -52,14 +52,25 @@
   align-content: space-around;
   margin: 0 40px 0 0;
 }
+.footer-right-wrapper p {
+  font-size: 15px;
+  margin: 0;
+}
+.footer-center-wrapper {
+  width: 224px;
+  margin: auto;
+}
+.footer-center-wrapper p {
+  font-size: 15px;
+  text-align: center;
+  margin: 0;
+}
 .social-media-list {
   width: 100%;
   list-style: none;
   display: flex;
   // align-items: center;
   justify-content: space-between;
+  margin-left: 0 !important;
 }
-.footer-right-wrapper p {
-  font-size: 15px;
-  margin: 0;
-}
+

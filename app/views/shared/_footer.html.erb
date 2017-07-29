@@ -1,8 +1,8 @@
 
 <div class="footer footer-gray <%#= (params[:controller] == 'lines' && params[:action] == 'show') ? 'footer-gray' : 'footer-green' %>">
 
-  <!-- List of links to related pages -->
-  <ul class="page-list">
+  <!-- List of links to related pages if screen size > xs -->
+  <ul class="page-list hidden-xs">
     <li><a href="#">About</a></li>
     <li><a href="#">How it works</a></li>
     <li><a href="#">FAQ</a></li>
@@ -11,14 +11,24 @@
     <li><a href="#">Contact</a></li>
   </ul>
 
-  <!-- Right-aligned list of social media icon links -->
-  <div class="footer-right-wrapper">
-    <ul class="social-media-list list-inline">
-      <li><a href="#" class="fa fa-linkedin"></a></li>
-      <li><a href="#" class="fa fa-facebook"></a></li>
-      <li><a href="#" class="fa fa-twitter"></a></li>
-    </ul>
-    <p>© Inline Technologies AB 2017</p>
+  <!-- Right-aligned list of social media icon links if screen size > xs -->
+  <div class="footer-right-wrapper hidden-xs">
+      <ul class="social-media-list list-inline">
+        <li><a href="#" class="fa fa-linkedin"></a></li>
+        <li><a href="#" class="fa fa-facebook"></a></li>
+        <li><a href="#" class="fa fa-twitter"></a></li>
+      </ul>
+      <p>© Inline Technologies AB 2017</p>
+  </div>
+
+  <!-- Centered list of social media icon links if screen size = xs -->
+  <div class="footer-center-wrapper visible-xs">
+      <ul class="social-media-list list-inline">
+        <li><a href="#" class="fa fa-linkedin"></a></li>
+        <li><a href="#" class="fa fa-facebook"></a></li>
+        <li><a href="#" class="fa fa-twitter"></a></li>
+      </ul>
+      <p>© Inline Technologies AB 2017</p>
   </div>
 
 </div>
