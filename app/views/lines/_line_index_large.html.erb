@@ -1,0 +1,61 @@
+
+<!-- List of search results -->
+<h2 class="text-center"><%= pluralize @results.count, "result" %> found:</h2>
+<div class="line-list-wrapper-large">
+  <div class="col-md-6 col-lg-8 line-list-large">
+    <ul class="list-unstyled">
+
+      <% @results.each do |line| %>
+          <% if line.photo? %>
+            <div class="line-li line-li-large" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url('<%= cl_image_path line.photo, crop: :fill %>');">
+          <% else %>
+            <div class="line-li line-li-large" style="background-image: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%), url(<%= image_url('airport-line-3.png') %>);">
+          <% end %>
+              <li>
+                <h3><%= link_to line.title %></h3>
+                <div class="line-li-data">
+                  <table>
+                    <tr>
+                      <td class="text-center">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                      </td>
+                      <td>
+                        <p><%= line.organization_name %></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                      </td>
+                      <td>
+                        <p><%= line.location %></p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li>
+                <% avatar_url = line.user.facebook_picture_url || "avatar-placeholder.png" %>
+                <%= image_tag avatar_url, class: "avatar-large li-avatar" %>
+              </li>
+              <li>
+                <!-- Circle showing the est time left of the line -->
+                <div class="li-time visible-lg">
+                  <p>About <%= est_time_left(line)%>h left</p>
+                </div>
+              </li>
+              <a href="<%= line_path(line) %>" class="line-list-link"></a>
+            </div>
+
+      <% end %>
+
+    </ul>
+  </div>
+
+  <!-- Map with geolocation results styled with Snazzymaps -->
+  <div class="col-md-6 col-lg-4 index-map-large">
+    <div id="line-index-map-large"></div>
+    <%= render partial: "line_index_map_large" %>
+  </div>
+
+</div>

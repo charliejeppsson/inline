@@ -89,11 +89,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .how-it-works-header h1 {
   font-size: 50px;
   text-shadow: 0px 1px $darkgray;
   color: $darkgray;
+  margin-bottom: 50px;
 }
 .how-it-works-steps {
   font-family: $base-font;
