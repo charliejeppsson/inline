@@ -8,12 +8,15 @@
   <!-- Transparent navbar on top of banner background image -->
   <%= render partial: 'shared/navbar' %>
   <div class="line-banner-content">
-    <h1><%= @line.title %></h1>
+    <h1 class="hidden-xs"><%= @line.title %></h1>
+    <h2 class="visible-xs"><%= @line.title %></h2>
     <!-- Estimated time left of line -->
     <% unless @line.appointments.empty? %>
-      <h2>About <%= est_time_left(@line)%>h left</h2>
+      <h2 class="hidden-xs">About <%= est_time_left(@line)%>h left</h2>
+      <h3 class="visible-xs">About <%= est_time_left(@line)%>h left</h3>
     <% else %>
-      <h2>This line is currently empty.</h2>
+      <h2 class="hidden-xs">This line is currently empty.</h2>
+      <h3 class="visible-xs">This line is currently empty.</h3>
     <% end %>
     <!-- "Get in line" or "drop out of line" button, depending on current user -->
     <div style="margin-top: 30px;"> <%= render partial: 'line_buttons' %> </div>

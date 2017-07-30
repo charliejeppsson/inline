@@ -1,7 +1,14 @@
 
+<!-- Visualizing the line info -->
 <div class="tab-content hidden" id="line_info">
-  <h2 class="text-center" style="width: 100%; margin-bottom: 10px; height: 34px;">Line information</h2>
-  <div class="line-info-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 line-info-header">
+        <h2 class="text-center">Line information</h2>
+      </div>
+    </div>
+
+    <!-- Formatting the relevant information in an iterable array -->
     <% user = User.find(@line.user_id) %>
     <% line_list = { %>
       <% "Organization:": @line.organization_name, %>
@@ -12,13 +19,33 @@
       <% "Average service time:": "About " + @line.avg_service_time.to_s + " minutes" %>
     <% } %>
 
-    <% line_list.each do |key, value| %>
-      <% unless value.nil? || value == "" %>
-        <ul class="line-info-list">
-          <li><h4 class="text-left"><%= key %></h4></li>
-          <li><h4 class="text-right"><%= value %></h4></li>
-        </ul>
-      <% end %>
-    <% end %>
+    <!-- Info section for viewport sizes > xs -->
+    <div class="row hidden-xs">
+      <div class="col-xs-12 line-info-wrapper-large">
+        <% line_list.each do |key, value| %>
+          <% unless value.nil? || value == "" %>
+            <ul class="line-info-list-large">
+              <li><h4 class="text-left"><%= key %></h4></li>
+              <li><h4 class="text-right"><%= value %></h4></li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Info section for viewport size xs -->
+    <div class="row visible-xs">
+      <div class="col-xs-12 line-info-wrapper-small">
+        <% line_list.each do |key, value| %>
+          <% unless value.nil? || value == "" %>
+            <ul class="line-info-list-small">
+              <li><p class="text-left"><%= key %></p></li>
+              <li><p class="text-right"><%= value %></p></li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>
