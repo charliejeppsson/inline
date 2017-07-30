@@ -23,17 +23,17 @@
   </div>
 
   <!-- Tab panel with links to sub pages -->
-  <div class="tabs">
-    <% if @user_is_host %>
-      <a class="tab active" data-target="#line_admins">Line admins</a>
-      <a class="tab" data-target="#line_info">Line info</a>
-      <a class="tab" data-target="#current_line">Current line</a>
-      <a class="tab" data-target="#line_settings">Settings</a>
-    <% else %>
-      <a class="tab active" data-target="#line_directions">Directions</a>
-      <a class="tab" data-target="#line_info">Line info</a>
-      <a class="tab" data-target="#current_line">Current line</a>
-      <a class="tab" data-target="#contact_admins">Contact</a>
-    <% end %>
+  <div class="visible-xs">
+    <div class="tabs">
+      <%= render partial: "tab_buttons" %>
+    </div>
   </div>
+
+  <div class="hidden-xs">
+    <div class="tabs tab-buttons-big">
+      <%= render partial: "tab_buttons" %>
+    </div>
+  </div>
+
+
 </div>

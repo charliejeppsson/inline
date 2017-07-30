@@ -14,7 +14,7 @@
 .admin-list {
   height: 250px;
   overflow: scroll;
-  margin-top: 30px;
+
 }
 .admin-list-row {
   display: flex;
@@ -30,10 +30,11 @@
 .admin-list-avatar {
   width: 40px;
   border-radius: 50%;
-  margin-right: 30px;
+  margin: 0 10px 0 10px;
 }
 .admin-list-body {
   width: 200px;
+  margin-left: 15px;
 }
 .admin-list-body h4 {
   text-align: left;

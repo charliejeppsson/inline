@@ -4,11 +4,11 @@
   <div class="container contact-admins-wrapper">
     <div class="row">
       <div class="col-xs-12">
-        <h2 class="text-center"><%= pluralize (@admins.count + 1), "admin is", "admins are" %> helping people in this line</h2>
+        <h2 class="text-center"><%= pluralize (@admins.count + 1), "admin" %> in this line</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-md-4 col-md-offset-4">
+      <div class="col-xs-12 col-md-4 col-md-offset-4" style="margin-top: 30px;">
         <div class="admin-list">
           <% admins_and_hosts = [] %>
           <% admins_and_hosts << @line.user %>
