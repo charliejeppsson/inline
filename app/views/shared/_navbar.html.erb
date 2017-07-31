@@ -45,15 +45,15 @@
     <% else %>
 
       <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Sign in"), new_user_session_path, class: "btn my-btn high-btn" %>
+      <%= link_to t(".sign_in", default: "Sign in"), new_user_session_path, class: "btn my-btn high-btn", style: "margin-left: 30px;" %>
 
     <% end %>
 
-    <% avatar_url = current_user.facebook_picture_url || "avatar-placeholder.png" %>
     <!-- Avatar with profile picture and dropdown -->
     <div class="navbar-wagon-item">
       <div class="dropdown">
         <% if user_signed_in? %>
+          <% avatar_url = current_user.facebook_picture_url || "avatar-placeholder.png" %>
           <%= image_tag avatar_url, class: "avatar-large dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li><%= link_to "Create line", new_line_path, method: :get %></li>
@@ -69,6 +69,7 @@
   <div class="navbar-wagon-item visible-xs">
     <div class="dropdown">
       <% if user_signed_in? %>
+        <% avatar_url = current_user.facebook_picture_url || "avatar-placeholder.png" %>
         <%= image_tag avatar_url, class: "avatar-large dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
           <li><%= link_to "Create line", new_line_path, method: :get %></li>
