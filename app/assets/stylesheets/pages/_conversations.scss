@@ -3,17 +3,20 @@
   height: calc(100vh - 90px - 150px);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .inbox-row {
   width: 100%;
+  height: 80%;
 }
 .inbox-col-conversations {
   height: 100%;
   padding: 0 15px;
 }
 .inbox-col-messages {
-  max-height: 544px;
+  max-height: 100%;
   overflow: scroll;
+  padding-right: 0;
 }
 .inbox-col-scroll {
   overflow: scroll;
@@ -21,11 +24,15 @@
 
 .panel-heading {
   background-color: $darkgray;
+  border-radius: 5px 5px 0 0;
 }
 .panel-title {
   color: $white;
   font-family: $header-font;
   font-size: 16px;
+}
+.chats-row-large {
+  height: 50%;
 }
 
 // Current chat parters list design
@@ -40,6 +47,16 @@
 }
 .chat-list-item:hover {
   background-color: white;
+}
+.chat-list-item-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  width: 100%;
+  margin: 8px 0 8px 0;
 }
 
  // Body design
@@ -60,6 +77,11 @@
   width: 40px;
   border-radius: 50%;
   margin-right: 30px;
+}
+.chat-list-avatar-small {
+  width: 40px;
+  border-radius: 50%;
+  margin: 0;
 }
 
 // Controls design
@@ -104,13 +126,27 @@
   text-decoration: none;
   color: $black;
 }
+.my-panel {
+  border: none;
+  height: 100%;
+  background-color: transparent;
+}
+.my-panel-large {
+  height: 90%;
+  padding-bottom: 44px;
+  background-color: #E0E0E0;
+}
 .panel-body {
   background-color: #E0E0E0;
   overflow: scroll;
 }
+.panel-body-large {
+  height: 90%;
+}
 .panel-body-conversations {
-  height: 216px;
   padding: 0 15px;
+  height: 100%;
+  background-color: transparent;
 }
 .panel-body-messages {
   max-height: 216px;

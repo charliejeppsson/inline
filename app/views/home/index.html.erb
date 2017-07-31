@@ -1,87 +1,30 @@
 <!-- Chat room / inbox view -->
 <div class="container inbox-wrapper">
-  <div class="row inbox-row" style="padding-left: 40px;">
+  <div class="row inbox-row">
+    <div class="col-xs-2 col-md-4 inbox-col-conversations">
 
-      <div class="col-md-4 inbox-col-conversations">
-
-        <div class="row">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="panel-title">Your current conversations</div>
-            </div>
-            <div class="panel-body panel-body-conversations">
-              <!-- List all current chat partners-->
-              <% my_conversations = Conversation.where(["recipient_id = ? or sender_id = ?", current_user.id, current_user.id]).each do |conversation| %>
-                <% conversation.sender != current_user ? user = conversation.sender : user = conversation.recipient %>
-                <% avatar_url = user.facebook_picture_url || "https://timeforgeography.co.uk/static/img/avatar-placeholder.png" %>
-                <div class="chat-list-item">
-                  <%= image_tag avatar_url, class: "chat-list-avatar" %>
-                  <div class='chat-list-body'>
-                    <ul class="list-inline" style="margin: 0;">
-                      <li style="height: 100%;">
-                        <h4> <%= link_to "#{user.first_name} #{user.last_name}", conversations_path(user_id: user), remote: true, method: :post, class: "name-link" %> </h4>
-                      </li>
-                      <!-- Add badge containing amount of unread messages -->
-                      <% unread_messages = [] %>
-                      <% conversation.messages.each do |message| %>
-                        <% if message.read_status == false && message.user_id != current_user.id %>
-                          <% unread_messages << message %>
-                        <% end %>
-                      <% end %>
-                      <% if unread_messages.count > 0 %>
-                        <li style="height: 100%;">
-                          <div class="con-badge">
-                            <%= unread_messages.count %>
-                          </div>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <!-- List all potential chat partners for the current user -->
-        <div class="row">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="panel-title">Your hosts and admins</div>
-            </div>
-            <div class="panel-body panel-body-conversations">
-              <% admins_and_hosts = [] %>
-              <% current_user.appointments.each do |appointment| %>
-                <!-- Add all hosts of all the lines the current user is in to the array -->
-                <% admins_and_hosts << appointment.line.user %>
-                <!-- Add all admins of all the lines the current user is in to the array -->
-                <% appointment.line.administrators.each do |admin| %>
-                  <% admins_and_hosts << admin.user %>
-                <% end %>
-              <% end %>
-
-              <% admins_and_hosts.each do |user| %>
-                <% avatar_url = user.facebook_picture_url || "avatar-placeholder.png" %>
-                <div class="chat-list-item">
-                  <%= image_tag avatar_url, class: "chat-list-avatar" %>
-                  <div class='chat-list-body'>
-                    <ul class="list-inline" style="margin: 0;">
-                      <li style="height: 100%;">
-                        <h4> <%= link_to "#{user.first_name} #{user.last_name}", conversations_path(user_id: user), remote: true, method: :post, class: "name-link" %> </h4>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              <% end %>
-
-            </div>
-          </div>
-        </div>
+      <!-- Current conversation list for viewport sizes md and lg -->
+      <div class="row chats-row-large hidden-xs hidden-sm">
+        <!-- List all current chat partners-->
+        <%= render partial: "my_current_chat_partners" %>
       </div>
 
+      <!-- Potential conversation list for viewport sizes md and lg -->
+      <div class="row chats-row-large hidden-xs hidden-sm">
+        <!-- List all potential chat partners for the current user -->
+        <%= render partial: "my_admins_and_hosts" %>
+      </div>
 
+      <!-- Current and potential conversation list for viewport sizes xs and sm -->
+      <div class="row visible-xs visible-sm" style="height: 100%;">
+        <!-- List of current conversations and potential new conversations with only avatars -->
+        <%= render partial: "my_admins_and_hosts_small" %>
+      </div>
+
+    </div>
+
+    <!-- List all current conversations and their content -->
     <div class="col-md-8 inbox-col-messages">
-      <!-- List all current conversations and their content -->
       <ul id="conversations-list" class="inbox-col-scroll">
         <% @conversations.each do |conversation| %>
           <%= render 'conversations/conversation', conversation: conversation, user: current_user %>

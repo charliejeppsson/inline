@@ -1,0 +1,23 @@
+<!-- List of current conversations and potential new conversations with only avatars -->
+<div class="panel my-panel">
+  <div class="panel-body panel-body-conversations">
+    <% admins_and_hosts = [] %>
+    <% current_user.appointments.each do |appointment| %>
+      <!-- Add all hosts of all the lines the current user is in to the array -->
+      <% admins_and_hosts << appointment.line.user %>
+      <!-- Add all admins of all the lines the current user is in to the array -->
+      <% appointment.line.administrators.each do |admin| %>
+        <% unless admins_and_hosts.include?(admin.user) %>
+          <% admins_and_hosts << admin.user %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% admins_and_hosts.each do |user| %>
+      <% avatar_url = user.facebook_picture_url || "avatar-placeholder.png" %>
+      <%= link_to conversations_path(user_id: user), remote: true, method: :post, class: "chat-list-item-small" do %>
+        <%= image_tag avatar_url, class: "chat-list-avatar-small" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
