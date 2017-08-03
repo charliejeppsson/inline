@@ -1,0 +1,5 @@
+meta_product_name: "InLine"
+meta_title: "InLine - Never wait in line again"
+meta_description: "InLine digitizes the obsolete queueing tag notes, so that you can spend your time better than waiting in a useless line."
+meta_image: "inline-home-page.png"                       # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards
