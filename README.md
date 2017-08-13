@@ -10,13 +10,13 @@ InLine does just that - it allows organizations to create virtual lines that the
   <li>Built with Ruby on Rails</li>
   <li>System architecture with 40+ routes</li>
   <li>Database schema with 8 models and 9 controllers</li>
-  <li>Front-end designed with Sketch</li>
-  <li>Mobile-responsiveness with Bootstrap and FlexBox</li>
   <li>User authentication with Devise and Auth0</li>
   <li>User authorization with Pundit</li>
   <li>APIs integrated: Facebook, Google Maps JavaScript API, Google Places API</li>
   <li>Image uploading with CarrierWave and Cloudinary</li>
   <li>Real-time chat with ActionCable, ActiveJob and Redis</li>
+  <li>Front-end design with Sketch</li>
+  <li>Mobile-responsiveness with Bootstrap and FlexBox</li>
   <li>Domain registered with Gandi</li>
   <li>Deployed with Heroku</li>
 </ul>
