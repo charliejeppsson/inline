@@ -10,6 +10,7 @@ InLine does just that - it allows organizations to create virtual lines that the
   <li>MVC web app built with Ruby on Rails</li>
   <li>System architecture with 40+ routes</li>
   <li>Database schema with 8 models and 9 controllers</li>
+  <li>Object-relational mapping with ActiveRecord and PostgreSQL</li>
   <li>User authentication with Devise and Auth0</li>
   <li>User authorization with Pundit</li>
   <li>APIs integrated: Facebook, Google Maps JavaScript API, Google Places API</li>
