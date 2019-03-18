@@ -25,7 +25,6 @@ InLine does just that - it allows organizations to create virtual lines that the
 
 <h2>Production links</h2>
 <ul>
-  <li><a href="http://inline-app.com" target="_blank"><p>http://inline-app.com</p></a></li>
   <li><a href="https://inline-app.herokuapp.com" target="_blank"><p>https://inline-app.herokuapp.com</p></a></li>
 </ul>
 
